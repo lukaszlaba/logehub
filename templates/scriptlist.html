@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block title %} Script list {% endblock %}
+
+{% block page %}
+    <h2>Script list</h2>
+    <h5>Number of scripts : {{scripts|length}} </h5>
+    <hr width=”100″>
+    {% for script in scripts%}
+        <h4> {{script.name}} <a href="{% url 'report' script.id %}"><i class="fas fa-forward fa-1x"></i></a></h4>
+        <p>Category {{script.category}}. {{script.description}}</p>
+        <hr width=”100″>
+    {% endfor %}
+
+    <footer>
+      <p>Author: Lukasz Laba<br>
+    </footer>
+{% endblock %}

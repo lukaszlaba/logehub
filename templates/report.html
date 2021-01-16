@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ script.name}}</title>
+</head>
+<body>
+<a href="{% url 'list' %}" > <<<< </a>
+<h5>Script name: {{ script.name}}</h5>
+<hr width=”300″>
+{% autoescape off %}
+    {{report }}
+{% endautoescape %}
+<hr width=”300″>
+<a href="{% url 'list' %}" > <<<< </a>
+</body>
+</html>
