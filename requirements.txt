@@ -2,3 +2,6 @@ django
 gunicorn
 django-heroku
 mistune
+
+strupy
+unum
