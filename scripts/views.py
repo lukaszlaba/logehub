@@ -60,7 +60,7 @@ def report_edit(request):
       script = script_dict[script_id]
    except:
       return HttpResponse('<p> brak klucza' + str(script_id) + ' w ' + str(script_dict) + '</p>')
-   shell.assign_code()
+   shell.assign_code(script)
    #---
    script.editCode(line_id, setvalues, index)
    #except process needed here
