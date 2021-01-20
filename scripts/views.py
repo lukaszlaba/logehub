@@ -54,7 +54,10 @@ def report_edit(request):
    index = data.split(';')[3]
    print(script_id, line_id, setvalues, index)
    #----
-   script = script_dict[script_id]
+   try:
+      script = script_dict[script_id]
+   except:
+      script = script_dict[script_id]
    shell.assign_code(script)
    #---
    script.editCode(line_id, setvalues, index)

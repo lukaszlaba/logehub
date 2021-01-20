@@ -67,3 +67,4 @@ SeeCategory : Steel
 
 SeeDescription : Dobiera zacisk
 '''
+
