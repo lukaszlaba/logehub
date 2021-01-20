@@ -74,7 +74,11 @@ def r_adj(text = 'text', link = 'link', comment = 'somecomment', mode = 1, code 
     r_shell.report_markdown += href +'\n\n'
     
 def r_img(imagename):
-    image_path = os.path.dirname(r_shell.Script.script_path) + '/' + imagename
+    script_dir = os.path.basename(os.path.dirname(r_shell.Script.script_path))
+    image_path = os.path.join(script_dir, imagename)
+    image_path = os.path.join('/static', image_path)
+
+    #image_path = os.path.dirname(r_shell.Script.script_path) + '/' + imagename
     r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
 
 def r_plt(pltObject):

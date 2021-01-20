@@ -1,0 +1,96 @@
+------------------------venv----------------------------------
+Tworzenie nowego srodowiska o nazwa
+python -m venv venv
+
+aktywowanie srodowiska
+nazwa\Scripts\activate
+
+deaktywacja srodowiska
+deactivate
+
+instalacja django
+pip install django
+
+tworzenie nowego projektu
+django-admin startproject filmy .
+
+urychamianie
+python manage.py runserver
+
+zatrzymanie serverea
+Ctrl+C
+
+dodawanie aplikacji
+django-admin startapp filmyweb
+
+migracje - inicjowanie danych w bazie danych do aplikacji
+python manage.py migrate
+
+tworzenie superuser
+python manage.py createsuperuser
+
+definicja modeli
+
+mogracja zdefiniwanyhc modeli
+python manage.py makemigrations
+python manage.py migrate
+
+dodawanie modelu do admin w
+
+tryb debug w setings.py
+
+urls and views
+
+django template
+
+css
+
+forms
+
+
+-------------------------------------------
+-------------------------------------------
+Umieszczenie aplikacji na serwerze
+
+HEROKU.com
+
+https://github.com/heroku/python-getting-started
+https://devcenter.heroku.com/articles/getting-started-with-python
+
+----------------------------------------
+python3 -m venv localvenv
+pip install -r requirements.txt
+createdb -U postgres logeweb_db
+python manage.py makemigrations
+python manage.py migrate
+
+
+heroku local web -f Procfile.windows
+
+------------------------------------
+localvenv\Scripts\activate
+heroku local web -f Procfile.windows
+http://localhost:5000/
+python manage.py collectstatic
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zip all your lists to one list of tuples:
+
+ books= zip(ID, bookName, author, copies)
+ return render(request, 'allbooks.html',{ "books": books} )
+Than loop over it in templates like:
+
+             {% for book in books %}
+            <tr>
+                <td>{{ book.0 }}</td>
+                <td>{{ book.1 }}</td>
+                <td>{{ book.2 }} </td>
+                <td>{{ book.3 }}</td>
+            </tr>
+        {% endfor %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Display matplotlib
+https://forum.djangoproject.com/t/show-dynamically-generated-image-in-template/821
+https://medium.com/@mdhv.kothari99/matplotlib-into-django-template-5def2e159997

@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from scripts.core.Script import Script
 from scripts.core.Shell import Shell
+from scripts.core.script_manager import Manager
+
 from scripts.models import ScriptRecord
 from scripts.forms import NameForm
 
@@ -17,6 +19,7 @@ def get_random_id(length):
     return result_str
 
 shell = Shell()
+manager = Manager("C:\\Users\\Lenovo\\Documents\\logeweb\\scripts\\scriptbank")
 
 script_dict = {}
 
@@ -24,8 +27,12 @@ def report(request, script_id):
    script = Script()
    shell.assign_code(script)
    #---
-   script.code_oryginal = get_object_or_404(ScriptRecord, pk=script_id).code
-   script.name = get_object_or_404(ScriptRecord, pk=script_id).name
+   print(script_id)
+   script_path = manager.script_list[int(script_id)]
+   print(script_path)
+   script.openFile(script_path)
+   #script.code_oryginal = get_object_or_404(ScriptRecord, pk=script_id).code
+   #script.name = get_object_or_404(ScriptRecord, pk=script_id).name
    #---
    script.script_id = get_random_id(7)
    script_dict[script.script_id] = script
@@ -55,4 +62,17 @@ def report_edit(request):
 
 def script_list(request):
    all_scripts = ScriptRecord.objects.all()
-   return render(request, 'scriptlist.html', {'scripts': all_scripts})
+
+   ID = range(len(manager.script_list))
+   list_of_path = manager.script_list
+   list_of_name = [manager.script_name[i] for i in list_of_path]
+   list_of_description = [manager.script_description[i] for i in list_of_path]
+
+   script_book = zip(ID, list_of_name, list_of_description, list_of_path)
+   number_of_scripts = len(list_of_path)
+
+   return render(request, 'scriptlist.html',
+                 {'scripts': all_scripts,
+                  'script_book': script_book,
+                  'number_of_scripts': number_of_scripts}
+                 )
