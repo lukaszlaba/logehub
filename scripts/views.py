@@ -6,6 +6,8 @@ from scripts.core.Script import Script
 from scripts.core.Shell import Shell
 from scripts.core.script_manager import Manager
 
+from django.conf import settings
+
 from scripts.models import ScriptRecord
 from scripts.forms import NameForm
 
@@ -28,6 +30,7 @@ print(path.join(THIS_DIR, 'scriptbank'), '<<<<<<<<<<<<<<<<<<<,,,')
 manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 
 script_dict = {}
+settings.script_dict = {}
 
 def report(request, script_id):
    global script_dict
@@ -42,7 +45,7 @@ def report(request, script_id):
    #script.name = get_object_or_404(ScriptRecord, pk=script_id).name
    #---
    script.script_id = get_random_id(7)
-   script_dict[script.script_id] = script
+   settings.script_dict[script.script_id] = script
    #---
    script.parse()
    shell.run_parsed()
@@ -59,7 +62,7 @@ def report_edit(request):
    print(script_id, line_id, setvalues, index)
    #----
    try:
-      script = script_dict[script_id]
+      script = settings.script_dict[script_id]
    except:
       return HttpResponse('<p> brak klucza' + str(script_id) + ' w ' + str(script_dict) + '</p>')
    shell.assign_code(script)
