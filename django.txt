@@ -63,6 +63,7 @@ pip install -r requirements.txt
 createdb -U postgres logeweb_db
 python manage.py makemigrations
 python manage.py migrate
+git push heroku master
 
 
 heroku local web -f Procfile.windows
