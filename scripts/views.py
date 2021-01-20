@@ -59,9 +59,10 @@ def report_edit(request):
    try:
       script = script_dict[script_id]
    except:
-      time.sleep(3)
-      script = script_dict[script_id]
-   shell.assign_code(script)
+      pass
+   print(str(script_dict))
+   return HttpResponse('<p>' + str(script_dict) + '</p>')
+   shell.assign_code()
    #---
    script.editCode(line_id, setvalues, index)
    #except process needed here
