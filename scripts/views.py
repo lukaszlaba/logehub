@@ -13,13 +13,17 @@ import random
 import uuid
 import string
 
+THIS_DIR = path.dirname(path.abspath(__file__))
+
+
 def get_random_id(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
 
 shell = Shell()
-manager = Manager("C:\\Users\\Lenovo\\Documents\\logeweb\\scripts\\scriptbank")
+print(path.join(THIS_DIR, 'scriptbank'), '<<<<<<<<<<<<<<<<<<<,,,')
+manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 
 script_dict = {}
 
