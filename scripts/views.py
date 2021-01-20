@@ -31,12 +31,8 @@ def report(request, script_id):
    script = Script()
    shell.assign_code(script)
    #---
-   print(script_id)
    script_path = manager.script_list[int(script_id)]
-   print(script_path)
    script.openFile(script_path)
-   #script.code_oryginal = get_object_or_404(ScriptRecord, pk=script_id).code
-   #script.name = get_object_or_404(ScriptRecord, pk=script_id).name
    #---
    script.script_id = get_random_id(7)
    script_dict[script.script_id] = script
@@ -55,10 +51,7 @@ def report_edit(request):
    index = data.split(';')[3]
    print(script_id, line_id, setvalues, index)
    #----
-   try:
-      script = script_dict[script_id]
-   except:
-      return HttpResponse('<p> brak klucza' + str(script_id) + ' kkw ' + str(script_dict) + '</p>')
+   script = script_dict[script_id] #<<<<< tu jest problem na heroku
    shell.assign_code(script)
    #---
    script.editCode(line_id, setvalues, index)
