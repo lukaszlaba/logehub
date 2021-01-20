@@ -74,6 +74,9 @@ heroku local web -f Procfile.windows
 http://localhost:5000/
 python manage.py collectstatic
 
+https://github.com/stevenleeg/geemusic/issues/125
+heroku config:set DEBUG_MODE=True
+
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

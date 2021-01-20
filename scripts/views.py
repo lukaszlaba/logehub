@@ -13,6 +13,8 @@ import random
 import uuid
 import string
 
+import time
+
 THIS_DIR = path.dirname(path.abspath(__file__))
 
 
@@ -57,6 +59,7 @@ def report_edit(request):
    try:
       script = script_dict[script_id]
    except:
+      time.sleep(3)
       script = script_dict[script_id]
    shell.assign_code(script)
    #---
