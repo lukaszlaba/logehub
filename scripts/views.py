@@ -11,7 +11,6 @@ from scripts.models import ScriptRecord
 from scripts.forms import NameForm
 
 import random
-import uuid
 import string
 
 THIS_DIR = path.dirname(path.abspath(__file__))
