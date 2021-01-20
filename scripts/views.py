@@ -30,6 +30,7 @@ manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 script_dict = {}
 
 def report(request, script_id):
+   global script_dict
    script = Script()
    shell.assign_code(script)
    #---
@@ -48,6 +49,7 @@ def report(request, script_id):
    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
 
 def report_edit(request):
+   global script_dict
    data = path.basename(request.META.get('PATH_INFO', None))
    script_id = data.split(';')[0]
    script_id = script_id.replace('script_id', '')
