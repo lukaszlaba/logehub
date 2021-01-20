@@ -14,10 +14,7 @@ import random
 import uuid
 import string
 
-import time
-
 THIS_DIR = path.dirname(path.abspath(__file__))
-
 
 def get_random_id(length):
     letters = string.ascii_lowercase
