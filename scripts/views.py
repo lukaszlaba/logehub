@@ -53,6 +53,7 @@ def report_edit(request):
    print(script_id, line_id, setvalues, index)
    #----
    a = test_dict['ala']
+   print(script_dict)
    script = script_dict[script_id] #<<<<< tu jest problem na heroku
    shell.assign_code(script)
    #---
