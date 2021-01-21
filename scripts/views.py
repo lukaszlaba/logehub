@@ -25,6 +25,7 @@ print(path.join(THIS_DIR, 'scriptbank'), '<<<<<<<<<<<<<<<<<<<,,,')
 manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 
 script_dict = {}
+test_dict = {'ala':1, 'kot':2}
 
 def report(request, script_id):
    global script_dict
@@ -51,10 +52,11 @@ def report_edit(request):
    index = data.split(';')[3]
    print(script_id, line_id, setvalues, index)
    #----
+   a = test_dict['ala']
    script = script_dict[script_id] #<<<<< tu jest problem na heroku
    shell.assign_code(script)
    #---
-   script.editCode(line_id, setvalues, index)
+   #script.editCode(line_id, setvalues, index)
    #except process needed here
    #---
    script.parse()
