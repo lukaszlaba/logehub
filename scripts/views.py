@@ -10,8 +10,11 @@ from scripts.core.script_manager import Manager
 from scripts.models import ScriptRecord
 from scripts.forms import NameForm
 
+
 import random
 import string
+from datetime import datetime
+import pytz
 
 THIS_DIR = path.dirname(path.abspath(__file__))
 
@@ -24,8 +27,7 @@ shell = Shell()
 print(path.join(THIS_DIR, 'scriptbank'), '<<<<<<<<<<<<<<<<<<<,,,')
 manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 
-script_dict = {}
-test_dict = {'ala':1, 'kot':2}
+#script_dict = {}
 
 def report(request, script_id):
    global script_dict
@@ -36,7 +38,15 @@ def report(request, script_id):
    script.openFile(script_path)
    #---
    script.script_id = get_random_id(7)
-   script_dict[script.script_id] = script
+   script.name = manager.script_name[script_path]
+   #script_dict[script.script_id] = script
+
+   ScriptRecord.objects.create(script_id=script.script_id,
+                               name = script.name,
+                               code = script.code_oryginal,
+                               path = script.script_path,
+                               last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
+                               )
    #---
    script.parse()
    shell.run_parsed()
@@ -52,16 +62,29 @@ def report_edit(request):
    index = data.split(';')[3]
    print(script_id, line_id, setvalues, index)
    #----
-   a = test_dict['ala']
-   print(script_dict)
-   script = script_dict[script_id] #<<<<< tu jest problem na heroku
+   script = Script()
+   db_record = ScriptRecord.objects.get(script_id=script_id)
+
+   script.script_id = db_record.script_id
+   script.name = db_record.name
+   script.code_oryginal = db_record.code
+   script.script_path = db_record.path
+
+
+
+
    shell.assign_code(script)
    #---
-   #script.editCode(line_id, setvalues, index)
+   script.editCode(line_id, setvalues, index)
    #except process needed here
    #---
    script.parse()
    shell.run_parsed()
+
+   db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
+   db_record.code = script.code_oryginal
+   db_record.save()
+
    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
 
 def script_list(request):

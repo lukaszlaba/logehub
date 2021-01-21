@@ -7,9 +7,9 @@ from scripts.models import ScriptRecord
 
 @admin.register(ScriptRecord)
 class ScriptAdmin(admin.ModelAdmin):
-    fields = ['name', 'category', 'description', 'code']
-    list_display = ['name', 'category', 'description']
-    list_filter = ['category']
-    search_fields = ['name', 'category', 'description']
+    fields = ['script_id', 'name', 'code', 'path', 'last_time_used']
+    list_display = ['script_id', 'name', 'last_time_used']
+    #list_filter = ['category']
+    #search_fields = ['name', 'category', 'description']
 
 
