@@ -8,7 +8,7 @@ t = np.arange(-1.0, 2.0, 0.01)
 s1 = np.cos(9*np.pi*t) + 3 * t ** 2
 plt.figure(1)
 plt.plot(t, s1) #%plt
-#plt.clf()
+plt.clf()
 
 #! sdsd
 
