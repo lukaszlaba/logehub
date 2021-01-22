@@ -77,6 +77,8 @@ python manage.py collectstatic
 https://github.com/stevenleeg/geemusic/issues/125
 heroku config:set DEBUG_MODE=True
 
+https://logehub.herokuapp.com/
+
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -97,4 +99,4 @@ Than loop over it in templates like:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Display matplotlib
 https://forum.djangoproject.com/t/show-dynamically-generated-image-in-template/821
-https://medium.com/@mdhv.kothari99/matplotlib-into-django-template-5def2e159997
+

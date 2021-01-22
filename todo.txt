@@ -1,5 +1,10 @@
+
+
 - href edit
 - image display
 - tempfile display in report
 - stylizacja strony
 - tresc homepage
+
+Done:
+-

@@ -13,12 +13,17 @@ import re
 import copy
 import os
 
+import io
+import base64
+import urllib
+
 try:
     import svgwrite
 except ImportError:
     pass
 try:
-    import matplotlib.pyplot as plt
+    pass
+    #import matplotlib.pyplot as plt
 except ImportError:
     pass
     
@@ -82,11 +87,18 @@ def r_img(imagename):
     r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
 
 def r_plt(pltObject):
+    import matplotlib.pyplot as plt
     try:
-        name = str(r_shell._id) + '.png'
-        image_path = r_shell.get_tmp_file_path(name)
-        pltObject.savefig(image_path, dpi=(60))
-        r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
+        buf = io.BytesIO()
+        #name = str(r_shell._id) + '.png'
+        #image_path = r_shell.get_tmp_file_path(name)
+        pltObject.savefig(buf, dpi=(60), format='png')
+        buf.seek(0)
+        string = base64.b64encode(buf.read())
+        uri = urllib.parse.quote(string)
+        #r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
+        b64image = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='
+        r_shell.report_markdown += '![Hello World](data: image / png; base64, %s)'%uri +'\n\n'
         r_shell._id += 1
     except Exception as e :
         r_seepywarning('Matplotlib plt image save failure - %s' %str(e))
