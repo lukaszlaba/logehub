@@ -82,37 +82,34 @@ def r_img(imagename):
     script_dir = os.path.basename(os.path.dirname(r_shell.Script.script_path))
     image_path = os.path.join(script_dir, imagename)
     image_path = os.path.join('/static', image_path)
-
-    #image_path = os.path.dirname(r_shell.Script.script_path) + '/' + imagename
     r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
 
 def r_plt(pltObject):
     import matplotlib.pyplot as plt
     try:
         buf = io.BytesIO()
-        #name = str(r_shell._id) + '.png'
-        #image_path = r_shell.get_tmp_file_path(name)
         pltObject.savefig(buf, dpi=(60), format='png')
         buf.seek(0)
         string = base64.b64encode(buf.read())
         uri = urllib.parse.quote(string)
-        #r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
-        b64image = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='
-        r_shell.report_markdown += '![Hello World](data: image / png; base64, %s)'%uri +'\n\n'
+        r_shell.report_markdown += '![Matplotlib plot](data: image / png; base64, %s)'%uri +'\n\n'
         r_shell._id += 1
     except Exception as e :
         r_seepywarning('Matplotlib plt image save failure - %s' %str(e))
         
 def r_pil(PilImageObject):
     try:
-        name = str(r_shell._id)+ '.png'
-        image_path = r_shell.get_tmp_file_path(name)
-        PilImageObject.save(image_path)
-        r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
+        buf = io.BytesIO()
+        PilImageObject.save(buf, format='png')
+        buf.seek(0)
+        string = base64.b64encode(buf.read())
+        uri = urllib.parse.quote(string)
+        r_shell.report_markdown += '![Pillow image](data: image / png; base64, %s)'%uri +'\n\n'
         r_shell._id += 1
     except Exception as e :
         r_seepywarning('Pillow image save failure - %s' %str(e))
-        
+
+#!  <<<<<<<<<<<<<<<<<<<<<<HERE
 def r_tex(string):
     plt.figure(frameon=False)
     plt.axes(frameon=0)
