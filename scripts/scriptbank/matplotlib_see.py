@@ -10,7 +10,12 @@ plt.figure(1)
 plt.plot(t, s1) #%plt
 plt.clf()
 
-#! sdsd
+#! ##Fig. 2
+s1 = np.cos(9*np.pi*t) + 3 * t ** 3
+plt.figure(1)
+plt.plot(t, s1) #%plt
+plt.clf()
+
 
 '''
 SeeName : Matplotlib

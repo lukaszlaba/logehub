@@ -85,7 +85,6 @@ def r_img(imagename):
     r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
 
 def r_plt(pltObject):
-    import matplotlib.pyplot as plt
     try:
         buf = io.BytesIO()
         pltObject.savefig(buf, dpi=(60), format='png')
@@ -94,6 +93,7 @@ def r_plt(pltObject):
         uri = urllib.parse.quote(string)
         r_shell.report_markdown += '![Matplotlib plot](data: image / png; base64, %s)'%uri +'\n\n'
         r_shell._id += 1
+        #pltObject.close()
     except Exception as e :
         r_seepywarning('Matplotlib plt image save failure - %s' %str(e))
         
@@ -111,6 +111,7 @@ def r_pil(PilImageObject):
 
 #!  <<<<<<<<<<<<<<<<<<<<<<HERE
 def r_tex(string):
+    import matplotlib.pyplot as plt
     plt.figure(frameon=False)
     plt.axes(frameon=0)
     if string[0] != '$' and string[-1] != '$':
@@ -119,11 +120,22 @@ def r_tex(string):
     plt.xticks(())
     plt.yticks(())
     plt.tight_layout()
-    name = str(r_shell._id) + '.png'
-    image_path = r_shell.get_tmp_file_path(name)
-    plt.savefig(image_path, bbox_inches='tight', dpi=(2))
+
+    buf = io.BytesIO()
+    plt.savefig(buf, bbox_inches='tight', dpi=(2), format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+    r_shell.report_markdown += '![Tex figure](data: image / png; base64, %s)' % uri + '\n\n'
+
+
+
+
+    #name = str(r_shell._id) + '.png'
+    #image_path = r_shell.get_tmp_file_path(name)
+    #plt.savefig(image_path, bbox_inches='tight', dpi=(2))
     plt.close()
-    r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
+    #r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
     r_shell._id += 1
 
 def r_codetex(string):
