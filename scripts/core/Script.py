@@ -94,7 +94,7 @@ class Script():
 
     #------------------------
 
-    def editCode(self, lineID = 'id1', setvalues = None, index = None):
+    def editCode(self, lineID = 'id1', setvalues = None, index = None, new_value=''):
         if setvalues == 'None':
             setvalues = None
         #---
@@ -165,7 +165,8 @@ class Script():
                 newvalue = str(not(bool_oldvalue))
             else: # other cases
                 #input_result = QInputDialog.getText(None, 'Set new value',variable +'=', QLineEdit.Normal,oldvalue)
-                input_result = [input('Set new value'), True]#<<<<<<<<<edited
+                #input_result = [input('Set new value'), True]#<<<<<<<<<edited
+                input_result = [new_value, True]  # <<<<<<<<<edited
                 if input_result[1]:
                     newvalue = input_result[0]
 

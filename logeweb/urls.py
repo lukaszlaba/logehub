@@ -20,7 +20,6 @@ from logeweb.views import hello, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', hello),
     path('scripts/', include('scripts.urls')),
     re_path(r'^$', index, name='index'),
 ]

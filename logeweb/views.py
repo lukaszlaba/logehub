@@ -6,8 +6,7 @@ def hello(request):
 
 def index(request):
    text = """
-   <h1>Logehub start page !</h1>
-   <a href="/scripts/list/" > Go to script list </a>
+   <h1>Welocme to Logehub page !</h1>
+   <a href="/scripts/list/" > <h3>Go to script list >></h3> </a>
    """
    return HttpResponse(text)
-
