@@ -1,7 +1,7 @@
 from django import forms
 
-class NaszForm(forms.Form):
-    imie = forms.CharField(label='k = ', max_length=100)
+class Value_form(forms.Form):
+    value = forms.CharField(label='k = ', max_length=100)
 
 
 class Choice_form(forms.Form):

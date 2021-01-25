@@ -104,7 +104,7 @@ class Script():
         no = 1  
         while re.search(r"#<{2,}_idx_", script):
             script = script.replace(r'<_idx_', r"<_id%s_" % no, 1)
-            no += 1 
+            no += 1
         #---OPTION 1 Selectind one form list if list
         if setvalues :
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
@@ -117,7 +117,8 @@ class Script():
             listindex = int(expresion.group(3))
             #---asking for new value from choice list
             #value_selected = QInputDialog.getItem(None, 'Set new value', variable +'=', setvalues, listindex, False)[0]
-            value_selected = input('Set new value index' + str(setvalues))# <<<<<<<<<edited
+            #value_selected = input('Set new value index' + str(setvalues))# <<<<<<<<<edited
+            value_selected = new_value
             #---
             if value_selected:
                 index_selected = setvalues.index(value_selected)
@@ -135,32 +136,32 @@ class Script():
             oldvalue = oldvalue.rstrip() #for now this hotfix delete whitespace from the end of oldvalue string
             newvalue = None
             #---asking for new value
-            if ('filepath' in variable): # if variable look like filepath
-                directory = '/'
-                try:
-                    if os.path.isdir(os.path.dirname(eval(oldvalue))):
-                        directory = os.path.dirname(eval(oldvalue))
-                except:
-                    pass
-                askmsg = "Select new filepath for '%s' variable" %variable
-                filename = QFileDialog.getOpenFileName(caption=askmsg, directory=directory)[0]
-                if filename == '':
-                    newvalue = oldvalue
-                else:
-                    newvalue = "'%s'"%str(filename)
-            elif ('dirpath' in variable): # if variable look like dirpath
-                directory = '/'
-                try:
-                    if os.path.isdir(eval(oldvalue)):
-                        directory = os.path.dirname(eval(oldvalue))
-                except:
-                    pass
-                dirname = QFileDialog.getExistingDirectory(caption = 'Select directory', directory = directory)
-                if dirname == '':
-                    newvalue = oldvalue
-                else:                
-                    newvalue = "'%s'"%str(dirname)
-            elif (oldvalue.strip() in ['True', 'False']): # if variable has bool value
+            #if ('filepath' in variable): # if variable look like filepath
+            #    directory = '/'
+            #    try:
+            #        if os.path.isdir(os.path.dirname(eval(oldvalue))):
+            #            directory = os.path.dirname(eval(oldvalue))
+            #    except:
+            #        pass
+            #    askmsg = "Select new filepath for '%s' variable" %variable
+            #    filename = QFileDialog.getOpenFileName(caption=askmsg, directory=directory)[0]
+            #    if filename == '':
+            #        newvalue = oldvalue
+            #    else:
+            #        newvalue = "'%s'"%str(filename)
+            #elif ('dirpath' in variable): # if variable look like dirpath
+            #    directory = '/'
+            #    try:
+            #        if os.path.isdir(eval(oldvalue)):
+            #            directory = os.path.dirname(eval(oldvalue))
+            #    except:
+            #        pass
+            #    dirname = QFileDialog.getExistingDirectory(caption = 'Select directory', directory = directory)
+            #    if dirname == '':
+            #        newvalue = oldvalue
+            #    else:
+            #        newvalue = "'%s'"%str(dirname)
+            if (oldvalue.strip() in ['True', 'False']): # if variable has bool value
                 bool_oldvalue = eval(oldvalue)
                 newvalue = str(not(bool_oldvalue))
             else: # other cases

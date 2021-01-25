@@ -7,7 +7,7 @@ from scripts.core.Script import Script
 from scripts.core.Shell import Shell
 from scripts.core.script_manager import Manager
 
-from scripts.forms import NaszForm, Choice_form
+from scripts.forms import Value_form, Choice_form
 
 
 from scripts.models import ScriptRecord
@@ -93,34 +93,6 @@ def script_list(request):
                   'number_of_scripts': number_of_scripts}
                  )
 
-def nowy_form(request):
-    if request.method == 'POST':
-        form = NaszForm(request.POST)
-        if form.is_valid():
-            print('Form is valid')
-        text = """
-        <h1>Blallalala! %s</h1>
-        """ %form['imie'].value()
-        return HttpResponse(text)
-    else:
-        form = NaszForm()
-        form.fields['imie'].initial = 'ala'
-    return render(request, 'nasz_form.html', {'form': form})
-
-def nowy_form_1(request):
-    if request.method == 'POST':
-        form = Choice_form(request.POST)
-        if form.is_valid():
-            print('Form is valid')
-        text = """
-        <h1>Blallalala! %s</h1>
-        """ %form['value'].value()
-        return HttpResponse(text)
-    else:
-        form = Choice_form()
-        #form.fields['imi'].initial = 'ala'
-    return render(request, 'nasz_form.html', {'form': form})
-
 def report_edit_1(request):
     # --data from request
     data = path.basename(request.META.get('PATH_INFO', None))
@@ -142,11 +114,31 @@ def report_edit_1(request):
     script.script_path = db_record.path
     shell.assign_code(script)
 
-    if request.method == 'POST':
+    # --geting data about variable to be edited
+    script_code = script.code_oryginal
+    # ---
+    script_code = re.sub(r'#(<{2,})', r"#\1_idx_", script_code)
+    no = 1
+    while re.search(r"#<{2,}_idx_", script_code):
+        script_code = script_code.replace(r'<_idx_', r"<_id%s_" % no, 1)
+        no += 1
 
+    #--------------------------
+    if setvalues:
+        oldvalue = ''
+    else:
+        expresion = re.search(r'(\w+)\s*=\s*(.+)\s*#<{2,}_%s_' % line_id, script_code)
+        variable = expresion.group(1)
+        oldvalue = expresion.group(2)
+        oldvalue = oldvalue.rstrip()
+        new_value = oldvalue
+    #---------------------------
+
+    if request.method == 'POST' or oldvalue in ('True', 'False'):
        #---what is new data from form
-       form = NaszForm(request.POST)
-       new_value = form['imie'].value()
+       form = Value_form(request.POST)
+       new_value = form['value'].value()
+
 
        #---update scripy to new value
        script.editCode(line_id, setvalues, index, new_value = new_value)
@@ -165,14 +157,6 @@ def report_edit_1(request):
        return render(request, 'report.html', {'report': shell.report_html, 'script': script})
 
     else:
-        # --geting data about variable to be edited
-        script_code = script.code_oryginal
-        #---
-        script_code = re.sub(r'#(<{2,})', r"#\1_idx_", script_code)
-        no = 1
-        while re.search(r"#<{2,}_idx_", script_code):
-            script_code = script_code.replace(r'<_idx_', r"<_id%s_" % no, 1)
-            no += 1
         if setvalues:
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
             setvalues = setvalues.replace(" ", "")
@@ -185,8 +169,9 @@ def report_edit_1(request):
             #---
             form = Choice_form()
             form.fields['value'].label = variable + ' = '
-            choices = [(str(i), setvalues[i]) for i in range(len(setvalues))]
+            choices = [(setvalues[i], setvalues[i]) for i in range(len(setvalues))]
             form.fields['value'].choices = choices
+            form.fields['value'].initial = choices[listindex][0]
             return render(request, 'nasz_form.html', {'form': form})
 
         else:
@@ -195,10 +180,8 @@ def report_edit_1(request):
             variable = expresion.group(1)
             oldvalue = expresion.group(2)
             oldvalue = oldvalue.rstrip()  # for now this hotfix delete whitespace from the end of oldvalue string
-
-
-            form = NaszForm()
-            form.fields['imie'].label = variable + ' = '
-            form.fields['imie'].initial = oldvalue
+            form = Value_form()
+            form.fields['value'].label = variable + ' = '
+            form.fields['value'].initial = oldvalue
             return render(request, 'nasz_form.html', {'form': form})
 
