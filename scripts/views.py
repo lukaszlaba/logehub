@@ -19,7 +19,8 @@ import pytz
 
 THIS_DIR = path.dirname(path.abspath(__file__))
 
-def get_random_id(length):
+def get_random_id():
+    length = 10
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
@@ -35,7 +36,7 @@ def report(request, script_id):
    script_path = manager.script_list[int(script_id)]
    script.openFile(script_path)
    #---
-   script.script_id = get_random_id(7)
+   script.script_id = get_random_id()
    script.name = manager.script_name[script_path]
    ScriptRecord.objects.create(script_id=script.script_id,
                                name = script.name,
@@ -46,35 +47,6 @@ def report(request, script_id):
    #---
    script.parse()
    shell.run_parsed()
-   return render(request, 'report.html', {'report': shell.report_html, 'script': script})
-
-def report_edit(request):
-   global script_dict #! <<<<<<<<<!!!!!!!!!!!!!!!!! delete
-   data = path.basename(request.META.get('PATH_INFO', None))
-   script_id = data.split(';')[0]
-   script_id = script_id.replace('script_id', '')
-   line_id = data.split(';')[1]
-   setvalues = data.split(';')[2]
-   index = data.split(';')[3]
-   print(script_id, line_id, setvalues, index)
-   #----
-   script = Script()
-   db_record = ScriptRecord.objects.get(script_id=script_id)
-
-   script.script_id = db_record.script_id
-   script.name = db_record.name
-   script.code_oryginal = db_record.code
-   script.script_path = db_record.path
-   shell.assign_code(script)
-   #---
-   script.editCode(line_id, setvalues, index)
-   #except process needed here
-   #---
-   script.parse()
-   shell.run_parsed()
-   db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
-   db_record.code = script.code_oryginal
-   db_record.save()
    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
 
 def script_list(request):
@@ -93,7 +65,28 @@ def script_list(request):
                   'number_of_scripts': number_of_scripts}
                  )
 
-def report_edit_1(request):
+def report_show(request):
+    # --data from request
+    data = path.basename(request.META.get('PATH_INFO', None))
+    script_id = data.split(';')[0]
+    script_id = script_id.replace('script_id', '')
+    # --build script
+    script = Script()
+    db_record = ScriptRecord.objects.get(script_id=script_id)
+    script.script_id = db_record.script_id
+    script.name = db_record.name
+    script.code_oryginal = db_record.code
+    script.script_path = db_record.path
+    shell.assign_code(script)
+    # ---run script to get html
+    script.parse()
+    shell.run_parsed()
+    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+
+
+
+
+def report_edit(request):
     # --data from request
     data = path.basename(request.META.get('PATH_INFO', None))
     script_id = data.split(';')[0]
@@ -103,7 +96,6 @@ def report_edit_1(request):
     if setvalues == 'None':
         setvalues = None
     index = data.split(';')[3]
-    print(script_id, line_id, setvalues, index)
 
     # --build script
     script = Script()
@@ -123,39 +115,39 @@ def report_edit_1(request):
         script_code = script_code.replace(r'<_idx_', r"<_id%s_" % no, 1)
         no += 1
 
-    #--------------------------
-    if setvalues:
-        oldvalue = ''
-    else:
-        expresion = re.search(r'(\w+)\s*=\s*(.+)\s*#<{2,}_%s_' % line_id, script_code)
-        variable = expresion.group(1)
-        oldvalue = expresion.group(2)
-        oldvalue = oldvalue.rstrip()
-        new_value = oldvalue
+    expresion = re.search(r'(\w+)\s*=\s*(.+)\s*#<{2,}_%s_' % line_id, script_code)
+    variable = expresion.group(1)
+    old_value = expresion.group(2)
+    old_value = old_value.rstrip()
     #---------------------------
 
-    if request.method == 'POST' or oldvalue in ('True', 'False'):
+    if old_value in ('True', 'False'):
+        script.editCode(line_id, setvalues, index)
+        # ---run script to get html
+        script.parse()
+        shell.run_parsed()
+        # ---save updated code
+        db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw')))
+        db_record.code = script.code_oryginal
+        db_record.save()
+        # ---display report
+        return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+
+    if request.method == 'POST' :
        #---what is new data from form
        form = Value_form(request.POST)
        new_value = form['value'].value()
-
-
        #---update scripy to new value
        script.editCode(line_id, setvalues, index, new_value = new_value)
-       #except process needed here
-
        #---run script to get html
        script.parse()
        shell.run_parsed()
-
        #---save updated code
        db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
        db_record.code = script.code_oryginal
        db_record.save()
-
        #---display report
        return render(request, 'report.html', {'report': shell.report_html, 'script': script})
-
     else:
         if setvalues:
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
@@ -172,16 +164,15 @@ def report_edit_1(request):
             choices = [(setvalues[i], setvalues[i]) for i in range(len(setvalues))]
             form.fields['value'].choices = choices
             form.fields['value'].initial = choices[listindex][0]
-            return render(request, 'nasz_form.html', {'form': form})
-
+            return render(request, 'edit_form.html', {'form': form})
         else:
             #---
             expresion = re.search(r'(\w+)\s*=\s*(.+)\s*#<{2,}_%s_' % line_id, script_code)
             variable = expresion.group(1)
             oldvalue = expresion.group(2)
             oldvalue = oldvalue.rstrip()  # for now this hotfix delete whitespace from the end of oldvalue string
+            #---
             form = Value_form()
             form.fields['value'].label = variable + ' = '
             form.fields['value'].initial = oldvalue
-            return render(request, 'nasz_form.html', {'form': form})
-
+            return render(request, 'edit_form.html', {'form': form})

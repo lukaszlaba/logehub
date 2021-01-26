@@ -28,24 +28,24 @@ class Script():
     def __init__(self):
         #---
         self._script_path = ''
-        self._script_path_observers = []
+        #self._script_path_observers = []
         self.savedir = APP_PATH
         #---
         self.code_oryginal = ''
         self.code_parsed = ''
-        self.set_init_script_code()
+        #self.set_init_script_code()
         #---
         self.stamptext = appinfo.report_stamp
         #--
-        self.saveLock = False
+        #self.saveLock = False
         #--
-        self.watcher = None
-        self._watcher_active = False
+        #self.watcher = None
+        #self._watcher_active = False
         #--
         self.script_id='Kjja334es'
         self.name = 'Nonamed'
 
-    def set_init_script_code(self):
+    def xset_init_script_code(self):
         self.code_oryginal = init_script_code
 
     #------------------------
@@ -57,15 +57,15 @@ class Script():
     @script_path.setter
     def script_path(self,value):
         self._script_path = value
-        if self._watcher_active: #if checkbox checked (watcher active) activate it for new path
-            self.activate_watcher()
+        #if self._watcher_active: #if checkbox checked (watcher active) activate it for new path
+        #    self.activate_watcher()
 
     #------------------------
 
-    def set_watcher(self, watcher):
+    def xset_watcher(self, watcher):
         self.watcher = watcher
 
-    def activate_watcher(self):
+    def xactivate_watcher(self):
         if self.watcher and self.script_path != '':
             self.deactivate_watcher() #clear current watcher's paths
             if self.watcher.addPath(self.script_path):
@@ -74,7 +74,7 @@ class Script():
                 pass
         self._watcher_active = True
 
-    def deactivate_watcher(self):
+    def xdeactivate_watcher(self):
         if self.watcher and self.script_path != '':
             #--clear watcher paths
             if self.watcher.files():
@@ -183,7 +183,7 @@ class Script():
 
     #------------------------        
 
-    def getTimerParameters(self):
+    def xgetTimerParameters(self):
         is_active = False
         timespace = None
         #---
@@ -202,7 +202,7 @@ class Script():
         
     #------------------------ 
 
-    def savecode(self):
+    def xsavecode(self):
         if self.saveLock:
             QMessageBox.information(None, 'Info', 'File open read only. Use save as option')
             return False
@@ -214,14 +214,7 @@ class Script():
             return True
 
     def openFile(self, file_path=None, saveLock = False):
-        #---asking for file path if not given
-        if file_path:
-            filename =  file_path
-        else:
-            filename = QFileDialog.getOpenFileName(caption = 'Open script',
-                                                    directory = self.savedir,
-                                                    filter = "Python script (*.py)")
-            filename = str(filename[0])
+        filename =  file_path
         #---
         if not filename == '':
             self.savedir = os.path.dirname(filename)
@@ -230,18 +223,18 @@ class Script():
             self.code_oryginal = file.read()    
             file.close()      
             self.parse()
-            self.saveLock = saveLock
+            #self.saveLock = saveLock
         else:
             pass
     
-    def open_markdown(self):
+    def xopen_markdown(self):
         filename = QFileDialog.getOpenFileName(caption = 'Open Markdown document',
                                                 directory = self.savedir,
                                                 filter = "Markdown document (*.md)")
         filename = str(filename[0])
         return filename
 
-    def newFile(self, template_path, info='Save as', initfilename='your_script', filedirectory = None):
+    def xnewFile(self, template_path, info='Save as', initfilename='your_script', filedirectory = None):
         #---asking for file path
         if filedirectory is None:
             filename,ffilter = QFileDialog.getSaveFileName(caption = info,
@@ -261,7 +254,7 @@ class Script():
             self.parse()
             self.saveLock = False
 
-    def saveAs(self, savepath = None):
+    def xsaveAs(self, savepath = None):
         if self.script_path:
             newname = 'Copy_' + os.path.basename(self.script_path)
         else:
@@ -309,12 +302,12 @@ class Script():
                 infotext += str(i) + '\n' 
         QMessageBox.information(None, 'Info', infotext)
 
-    def reloadcode(self):
+    def xreloadcode(self):
         file = codecs.open(self.script_path,'r', 'utf-8')
         self.code_oryginal = file.read()  
         file.close()
 
-    def code_has_changed(self):
+    def xcode_has_changed(self):
         # the case that some file already is open and user changed the code
         if self.script_path:
             file = codecs.open(self.script_path,'r', 'utf-8')

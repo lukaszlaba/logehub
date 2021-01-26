@@ -81,7 +81,7 @@ class Manager() :
              scriptlist = self.script_list.keys()
         return scriptlist
         
-    def run_some_script(self, scriptname):
+    def xrun_some_script(self, scriptname):
         if scriptname in self.script_list.keys():
             script_path = self.script_list[scriptname]
             subprocess.Popen(['python', '-m', 'seepy.SeePy', script_path, '-r']) #run as read only 

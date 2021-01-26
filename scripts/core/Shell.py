@@ -29,10 +29,10 @@ class Shell():
         #---
         self.Script = None
         #----
-        self.tmpdir = None
-        self.create_tempdir()
+        #self.tmpdir = None
+        #self.create_tempdir()
         #----
-        self.tempfile_nameprefix = 'tmp_loge_'
+        #self.tempfile_nameprefix = 'tmp_loge_'
         #----
         self.float_display_precison = 3
 
@@ -43,7 +43,7 @@ class Shell():
 
     #------------------------
     
-    def create_tempdir(self):
+    def xcreate_tempdir(self):
         if not self.tmpdir:
             dirpath = tempfile.mkdtemp()
             dirname = os.path.basename(dirpath)
@@ -52,14 +52,14 @@ class Shell():
             os.rename(dirpath, new_dirpath)
             self.tmpdir = new_dirpath
 
-    def get_tmp_file_path(self, filename):
+    def xget_tmp_file_path(self, filename):
         filename = self.tempfile_nameprefix + filename # adding prefix to name
         tmp_file_path = os.path.join(self.tmpdir, filename)
         return tmp_file_path
 
     #------------------------
 
-    def run_oryginal(self):
+    def xrun_oryginal(self):
         exec (self.Script.code_oryginal in globals(), locals())
 
     def run_parsed(self):
@@ -106,16 +106,16 @@ class Shell():
 
     #------------------------
     
-    def __del__ (self):
+    def __xdel__ (self):
         if self.tmpdir:
             self.close_shell()
         
-    def close_shell (self):
+    def xclose_shell (self):
         self.delete_tmpfile(deleteall=True)
         os.removedirs(self.tmpdir)
         self.tmpdir = None
             
-    def delete_tmpfile(self, deleteall=False):
+    def xdelete_tmpfile(self, deleteall=False):
         if deleteall:
             for content in os.listdir(self.tmpdir):
                 os.remove(self.tmpdir + '/' + content)
@@ -126,7 +126,7 @@ class Shell():
             
     #------------------------
     
-    def save_report_markdown(self, savedir = os.path.dirname(__file__), initfilename = 'new.md'):
+    def xsave_report_markdown(self, savedir = os.path.dirname(__file__), initfilename = 'new.md'):
         #---asking for file path
         filename = QFileDialog.getSaveFileName(caption = 'Save as Markdown document',
                                                 directory = self.savedir + '/' + initfilename,
