@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from logeweb.views import hello, index
+from logeweb.views import index
 
 
 urlpatterns = [

@@ -9,7 +9,6 @@ from scripts.core.script_manager import Manager
 
 from scripts.forms import Value_form, Choice_form
 
-
 from scripts.models import ScriptRecord
 
 import random
@@ -82,9 +81,6 @@ def report_show(request):
     script.parse()
     shell.run_parsed()
     return render(request, 'report.html', {'report': shell.report_html, 'script': script})
-
-
-
 
 def report_edit(request):
     # --data from request
