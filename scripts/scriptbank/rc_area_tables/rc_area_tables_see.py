@@ -22,7 +22,7 @@ if use_filter:
 	offset = 25 #<<< - dopuszczalna nadwyżka [procent]
 
 #! -----------
-show_per_number = False #<<< - powirzchnia dla ilości prętów
+show_per_number = False #<<< - powierzchnia dla ilości prętów
 if show_per_number:
 	headers = ['fi\nn'] + default_diameterlist
 	table = []
@@ -37,7 +37,7 @@ if show_per_number:
 		table.append(data)
 	tabulate_tab = tabulate(table, headers, tablefmt="fancy_grid") #%tab
 #! -----------
-show_per_spacing = False #<<< - powirzchnia dla rozstawu prętów na [mb]
+show_per_spacing = False #<<< - powierzchnia dla rozstawu prętów na [mb]
 if show_per_spacing:
 	headers = ['fi\ns'] + default_diameterlist
 	table = []
