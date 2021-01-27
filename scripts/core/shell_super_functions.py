@@ -96,6 +96,9 @@ def r_plt(pltObject):
         #pltObject.close()
     except Exception as e :
         r_seepywarning('Matplotlib plt image save failure - %s' %str(e))
+
+def r_tab(tabulateObject):
+    r_comment('''```\n%s\n```''' % str(tabulateObject))
         
 def r_pil(PilImageObject):
     try:

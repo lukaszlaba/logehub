@@ -8,6 +8,6 @@
 # Loge development team can be found in 'development.txt'
 #-----------------------------------------------------------------
 
-name = 'Loge'
+name = 'Logehub'
 version = '0.3.1'
 report_stamp = 'Created with ' + name + ' ' + version

@@ -6,3 +6,4 @@ mistune
 strupy
 unum
 matplotlib
+tabulate

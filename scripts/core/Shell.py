@@ -78,7 +78,8 @@ class Shell():
         r_mathcomment = super_functions.r_mathcomment
         r_adj = super_functions.r_adj
         r_img = super_functions.r_img
-        r_plt = super_functions.r_plt           
+        r_plt = super_functions.r_plt
+        r_tab = super_functions.r_tab
         r_pil = super_functions.r_pil
         r_tex = super_functions.r_tex
         r_codetex = super_functions.r_codetex

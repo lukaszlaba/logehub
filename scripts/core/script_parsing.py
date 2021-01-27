@@ -68,6 +68,12 @@ def parse(script=''):
     script = re.sub(    r'([ \t]*)(\w+)(.+)#%plt',
                         r"\1\2\3 \n\1r_plt(\2)",
                         script)
+
+    #--Tabulate table syntax (indentation acceptable)
+    script = re.sub(    r'([ \t]*)(\w+)(.+)#%tab',
+                        r"\1\2\3 \n\1r_tab(\2)",
+                        script)
+
     #--Pillow Image syntax (indentation acceptable)
     script = re.sub(    r'([ \t]*)(\w+)(.+)#%pil',
                         r"\1\2\3 \n\1r_pil(\2)",
