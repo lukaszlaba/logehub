@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 #! ##Tabele powierzchni zbrojenia
 
-#%img x_start.png
+#%img rc.png
 
 default_diameterlist=[4.5*u.mm,6*u.mm, 10*u.mm, 12*u.mm, 14*u.mm, 16*u.mm, 18*u.mm, 20*u.mm, 25*u.mm, 32*u.mm]
 default_quantitylist=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
