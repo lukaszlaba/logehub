@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from logeweb.views import index
+from logeweb.views import index, contact, contribute, about
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('scripts/', include('scripts.urls')),
     re_path(r'^$', index, name='index'),
+    path('contact/', contact, name='index'),
+    path('contribute/', contribute, name='index'),
+    path('about/', about, name='index'),
 ]

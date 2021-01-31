@@ -1,7 +1,18 @@
-<h4> Set new value for variable: </h4>
+{% extends 'main.html' %}
+{% block title %} Edit value {% endblock %}
+{% load static %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Ok">
-</form>
+{% block page %}
+
+<div class="card">
+  <h5 class="card-header">Set new value for variable:</h5>
+  <div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Ok">
+    </form>
+  </div>
+</div>
+
+{% endblock %}

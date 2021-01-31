@@ -60,7 +60,7 @@ https://devcenter.heroku.com/articles/getting-started-with-python
 ----------------------------------------
 python3 -m venv localvenv
 pip install -r requirements.txt
-createdb -U postgres logeweb_db
+createdb -U postgres logeweb_dbgg
 python manage.py makemigrations
 python manage.py migrate
 git push heroku master

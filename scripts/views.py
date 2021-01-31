@@ -54,11 +54,12 @@ def script_list(request):
    list_of_path = manager.script_list
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]
+   list_of_category = [manager.script_category[i] for i in list_of_path]
 
-   script_book = zip(ID, list_of_name, list_of_description, list_of_path)
+   script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category)
    number_of_scripts = len(list_of_path)
 
-   return render(request, 'scriptlist.html',
+   return render(request, 'scriptlist_1.html',
                  {'scripts': all_scripts,
                   'script_book': script_book,
                   'number_of_scripts': number_of_scripts}
