@@ -1,31 +1,27 @@
 from os import path
 import re
-
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from scripts.core.Script import Script
-from scripts.core.Shell import Shell
-from scripts.core.script_manager import Manager
-
-from scripts.forms import Value_form, Choice_form
-
-from scripts.models import ScriptRecord
-
 import random
 import string
 from datetime import datetime
 import pytz
 
+from django.shortcuts import render
+
+from scripts.core.Script import Script
+from scripts.core.Shell import Shell
+from scripts.core.script_manager import Manager
+from scripts.forms import Value_form, Choice_form
+from scripts.models import ScriptRecord
+
 THIS_DIR = path.dirname(path.abspath(__file__))
+shell = Shell()
+manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 
 def get_random_id():
     length = 10
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
-
-shell = Shell()
-manager = Manager(path.join(THIS_DIR, 'scriptbank'))
 
 def report(request, script_id):
    global script_dict
@@ -59,7 +55,7 @@ def script_list(request):
    script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category)
    number_of_scripts = len(list_of_path)
 
-   return render(request, 'scriptlist_1.html',
+   return render(request, 'scriptlist.html',
                  {'scripts': all_scripts,
                   'script_book': script_book,
                   'number_of_scripts': number_of_scripts}

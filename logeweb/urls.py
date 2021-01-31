@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from logeweb.views import index, contact, contribute, about
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('scripts/', include('scripts.urls')),

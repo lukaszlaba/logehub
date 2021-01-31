@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-
 class ScriptRecord(models.Model):
     script_id = models.CharField( default='-', max_length=64, blank=True)
     path = models.CharField(default='-', max_length=128, blank=True)

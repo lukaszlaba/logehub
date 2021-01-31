@@ -1,19 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Contact</title>
-  <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/ac5da047f7.js" crossorigin="anonymous"></script>
-</head>
-<body>
+{% extends 'main.html' %}
+{% block title %} Contact {% endblock %}
 
+{% block page %}
 <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
@@ -36,7 +24,6 @@
   </div>
 </nav>
 
-<p>Contact data</p>
+<p>Contact ...</p>
 
-</body>
-</html>
+{% endblock %}
