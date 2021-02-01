@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block title %} Edit value {% endblock %}
+
+{% block page %}
+
+<div class="card">
+  <h5 class="card-header">Variable edit error!</h5>
+  <div class="card-body">
+        <p>{{massage}}</p>
+        <a href="/scripts/report/{{data}}" > <button type="button" class="btn btn-primary">Try to edit again</button> </a>
+        <a href="/scripts/report/script_id{{script_id}}" > <button type="button" class="btn btn-primary">Back to script</button> </a>
+  </div>
+</div>
+
+{% endblock %}

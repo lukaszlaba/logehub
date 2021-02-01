@@ -4,8 +4,10 @@ import random
 import string
 from datetime import datetime
 import pytz
+import traceback
 
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from scripts.core.Script import Script
 from scripts.core.Shell import Shell
@@ -130,17 +132,25 @@ def report_edit(request):
        #---what is new data from form
        form = Value_form(request.POST)
        new_value = form['value'].value()
-       #---update scripy to new value
-       script.editCode(line_id, setvalues, index, new_value = new_value)
-       #---run script to get html
-       script.parse()
-       shell.run_parsed()
+       try :
+           #---update scripy to new value
+           script.editCode(line_id, setvalues, index, new_value = new_value)
+           #---run script to get html
+           script.parse()
+           shell.run_parsed()
+       except Exception as e:
+           massage = 'Error - ' + str(e)
+           return render(request, 'edit_error.html', {'data': data,
+                                                      'script_id': script_id,
+                                                      'massage': massage})
+
        #---save updated code
        db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
        db_record.code = script.code_oryginal
        db_record.save()
        #---display report
-       return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+       #return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+       return HttpResponseRedirect('/scripts/report/script_id%s'%script_id)
     else:
         if setvalues:
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
