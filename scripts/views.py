@@ -83,7 +83,9 @@ def report_show(request):
 
 def report_edit(request):
     # --data from request
-    data = path.basename(request.META.get('PATH_INFO', None))
+    data = request.META.get('PATH_INFO', None)
+    data = data.replace('/scripts/report/', '')
+    print(data, '<<<<<<<<<<<HWRW')
     script_id = data.split(';')[0]
     script_id = script_id.replace('script_id', '')
     line_id = data.split(';')[1]
