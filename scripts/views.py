@@ -87,6 +87,7 @@ def report_edit(request):
     script_id = data.split(';')[0]
     script_id = script_id.replace('script_id', '')
     line_id = data.split(';')[1]
+    print(data, '<<<<<<<<<<<<<<<<<<<<,,')
     setvalues = data.split(';')[2]
     if setvalues == 'None':
         setvalues = None

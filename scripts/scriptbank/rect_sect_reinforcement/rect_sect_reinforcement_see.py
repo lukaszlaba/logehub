@@ -41,7 +41,8 @@ else:
 #! Beton:
 concrete = MaterialConcrete()
 concrete_class_list = concrete.get_availableconcreteclass()
-concrete_class = concrete_class_list[4] #<<< - klasa betonu
+concrete_class_list = ['C12/15','C16/20','C20/25','C25/30','C30/37']
+concrete_class = concrete_class_list[1] #<<< - klasa betonu
 concrete.set_concreteclass(concrete_class)
 fcd = concrete.fcd
 fctm = concrete.fctm 

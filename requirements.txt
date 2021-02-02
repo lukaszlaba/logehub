@@ -7,3 +7,4 @@ strupy
 unum
 matplotlib
 tabulate
+svgwrite
