@@ -135,18 +135,12 @@ def r_codetex(string):
 
 def r_svg(svgObject):
     name = str(r_shell._id) + '.svg'
-    image_path = r_shell.get_tmp_file_path(name)
+    #image_path = r_shell.get_tmp_file_path(name)
     if type(svgObject) in [str]:
-        svg_file = open(image_path, "w")
-        svg_file.write(svgObject)
-        r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
-        svg_file.close()
+        r_shell.report_markdown += '![svg image](data:image/svg+xml; utf8, %s)'%svgObject + '\n\n'
         r_shell._id += 1
     elif type(svgObject) is svgwrite.drawing.Drawing:
-        svg_file = open(image_path, "w")
-        svg_file.write(svgObject.tostring())
-        r_shell.report_markdown += '![Alt text](%s)\n\n' % image_path
-        svg_file.close()
+        r_shell.report_markdown += '![svg image](data:image/svg+xml; utf8, %s)'%svgObject.tostring() + '\n\n'
         r_shell._id += 1
     else:
         r_seepywarning('Unknown SVG format given')
