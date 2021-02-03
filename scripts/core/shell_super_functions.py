@@ -134,17 +134,17 @@ def r_codetex(string):
     r_tex(codeformat(string))
 
 def r_svg(svgObject):
-    name = str(r_shell._id) + '.svg'
-    #image_path = r_shell.get_tmp_file_path(name)
     if type(svgObject) in [str]:
+        svgObject= svgObject.replace('<svg', '<svg xmlns = "http://www.w3.org/2000/svg"')
+        svgObject = svgObject.replace('\n', '')
         r_shell.report_markdown += '![svg image](data:image/svg+xml; utf8, %s)'%svgObject + '\n\n'
         r_shell._id += 1
     elif type(svgObject) is svgwrite.drawing.Drawing:
+        print(svgObject.tostring())
         r_shell.report_markdown += '![svg image](data:image/svg+xml; utf8, %s)'%svgObject.tostring() + '\n\n'
         r_shell._id += 1
     else:
         r_seepywarning('Unknown SVG format given')
-
 #----------
 
 def codeformat(string):

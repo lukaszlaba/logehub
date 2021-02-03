@@ -7,7 +7,12 @@
 
 #! ###or render SVG python string
 
-svgsyntax='<svg height="55" width="55"> <circle cx="30" cy="30" r="20" stroke="black" stroke-width="1" fill="tan" /></svg>'
+svgsyntax='''
+<svg height="55" width="55">
+    <circle cx="30" cy="30" r="20"
+    stroke="black" stroke-width="1" fill="tan" />
+</svg>
+'''
 svgsyntax #%svg
 
 #! so this is the way to get parametric drawing
@@ -21,7 +26,7 @@ svgsyntax='''
     <circle cx="{1}" cy="{2}"
     r="{0}" stroke="black" stroke-width="1" fill="tan" />
     <text x="{1}" y="{2}" fill="black"
-    font-size="15">circle {0} radius </text>  
+    font-size="15">circle {0} radius </text>
 </svg>
 '''.format(r, xs, ys)
 
@@ -45,4 +50,11 @@ svg_document.add(svg_document.text("Rectangle size" + str(a)+ 'x' +str(b) ,
                                    insert = (a/2-20, b/2)))
 
 svg_document #%svg
+
+'''
+SeeName : Svg
+SeeCategory : Svg
+
+SeeDescription : Test svg
+'''
 
