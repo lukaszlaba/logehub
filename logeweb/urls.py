@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from logeweb.views import index, contact, contribute, about
+from scripts.views import xbeam_home, xbeam_about, xbeam_contact
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,9 @@ urlpatterns = [
     path('contact/', contact, name='index'),
     path('contribute/', contribute, name='index'),
     path('about/', about, name='index'),
+
+    path('xbeam/', xbeam_home, name='xbeam'),
+    path('xbeam/home/', xbeam_home, name='xbeam'),
+    path('xbeam/about/', xbeam_about, name='xbeam'),
+    path('xbeam/contact/', xbeam_contact, name='xbeam'),
 ]
