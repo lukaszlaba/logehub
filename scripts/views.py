@@ -4,7 +4,6 @@ import random
 import string
 from datetime import datetime
 import pytz
-import traceback
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -47,7 +46,6 @@ def report(request, script_id):
    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
 
 def script_list(request):
-   all_scripts = ScriptRecord.objects.all()
    ID = range(len(manager.script_list))
    list_of_path = manager.script_list
    list_of_name = [manager.script_name[i] for i in list_of_path]
@@ -58,39 +56,9 @@ def script_list(request):
    number_of_scripts = len(list_of_path)
 
    return render(request, 'scriptlist.html',
-                 {'scripts': all_scripts,
-                  'script_book': script_book,
+                 {'script_book': script_book,
                   'number_of_scripts': number_of_scripts}
                  )
-
-
-#----------------------------------------------------------------------
-def xbeam_home(request):
-   all_scripts = ScriptRecord.objects.all()
-   ID = range(len(manager.script_list))
-   list_of_path = manager.script_list
-   list_of_name = [manager.script_name[i] for i in list_of_path]
-   list_of_description = [manager.script_description[i] for i in list_of_path]
-   list_of_category = [manager.script_category[i] for i in list_of_path]
-
-   script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category)
-   number_of_scripts = len(list_of_path)
-
-   return render(request, 'xbeam_home.html',
-                 {'scripts': all_scripts,
-                  'script_book': script_book,
-                  'number_of_scripts': number_of_scripts}
-                 )
-
-def xbeam_contact(request):
-   return render(request, 'xbeam_contact.html')
-
-def xbeam_about(request):
-   return render(request, 'xbeam_about.html')
-
-
-#----------------------------------------------------------------------
-
 
 def report_show(request):
     # --data from request

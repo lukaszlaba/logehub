@@ -14,9 +14,9 @@
     <title>{% block title %} {% endblock %}</title>
     <link rel="shortcut icon" href="{%  static 'beam.png' %}">
 
-    <style>
+<style>
 .main-image{
-    height: 100vh;
+    height: {% block bg_height %} {% endblock %};
     width: 100%;
     background-image: url("{%  static 'back_1.jpg' %}");
     background-size: cover;

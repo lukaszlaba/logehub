@@ -4,16 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ script.name}}</title>
-    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+    <link rel="shortcut icon" href="{%  static 'script.ico' %}">
 </head>
 <body>
-<a href="{% url 'list' %}" > <<<< </a>
 <h5>Script name: {{ script.name}}</h5>
 <hr width=”300″>
 {% autoescape off %}
     {{report }}
 {% endautoescape %}
 <hr width=”300″>
-<a href="{% url 'list' %}" > <<<< </a>
 </body>
 </html>
