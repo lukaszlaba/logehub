@@ -100,3 +100,7 @@ Than loop over it in templates like:
 Display matplotlib
 https://forum.djangoproject.com/t/show-dynamically-generated-image-in-template/821
 
+
+{% block bg_height %}100%{% endblock %}
+{% block bg_height %}100vh{% endblock %}
+
