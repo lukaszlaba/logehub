@@ -54,8 +54,10 @@ if show_per_spacing:
 #! -----------
 
 '''
+SeeID : 88949230
+SeeField : Structure
 SeeName : Tabele zbrojenia
-SeeCategory : Structure
+SeeCategory : Concrete
 
 SeeDescription : Interaktywne tablice powierzchni zbrojenia
 '''

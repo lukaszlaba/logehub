@@ -24,30 +24,10 @@ def get_random_id():
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
 
-def report(request, script_id):
-   #global script_dict
-   script = Script()
-   shell.assign_code(script)
-   #---
-   script_path = manager.script_list[int(script_id)]
-   script.openFile(script_path)
-   #---
-   script.script_id = get_random_id()
-   script.name = manager.script_name[script_path]
-   ScriptRecord.objects.create(script_id=script.script_id,
-                               name = script.name,
-                               code = script.code_oryginal,
-                               path = script.script_path,
-                               last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
-                               )
-   #---
-   script.parse()
-   shell.run_parsed()
-   return render(request, 'report.html', {'report': shell.report_html, 'script': script})
-
 def script_list(request):
-   ID = range(len(manager.script_list))
+
    list_of_path = manager.script_list
+   ID = [manager.script_ID[i] for i in list_of_path]
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]
    list_of_category = [manager.script_category[i] for i in list_of_path]
@@ -59,6 +39,29 @@ def script_list(request):
                  {'script_book': script_book,
                   'number_of_scripts': number_of_scripts}
                  )
+
+def report(request, script_ID):
+   #global script_dict
+   script = Script()
+   shell.assign_code(script)
+   #---
+   script_ID = int(script_ID) # this is permanent script ID
+   script_path = manager.give_me_path_for_ID(script_ID)
+   script.openFile(script_path)
+   #---
+   script.script_id = get_random_id() # this is temporary id for user that use this script
+   script.name = manager.script_name[script_path]
+   ScriptRecord.objects.create(script_id=script.script_id,
+                               name = script.name,
+                               code = script.code_oryginal,
+                               path = script.script_path,
+                               last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
+                               )
+   #---
+   script.parse()
+   shell.run_parsed()
+   return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+   #return HttpResponseRedirect('/scripts/report/script_id%s' % script.script_id)
 
 def report_show(request):
     # --data from request
@@ -126,7 +129,8 @@ def report_edit(request):
         db_record.code = script.code_oryginal
         db_record.save()
         # ---display report
-        return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+        #return render(request, 'report.html', {'report': shell.report_html, 'script': script})
+        return HttpResponseRedirect('/scripts/report/script_id%s' % script_id)
 
     if request.method == 'POST' :
        #---what is new data from form

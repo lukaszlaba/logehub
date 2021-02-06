@@ -60,8 +60,9 @@ if active:
 
 
 '''
+SeeID : 93429003
+SeeField : Structure
+SeeCategory : Steel
 SeeName : Sectionbase
-SeeCategory : Structure
-
 SeeDescription : Sectionbase of steel profile.
 '''

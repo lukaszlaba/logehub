@@ -3,8 +3,8 @@ from django.shortcuts import render
 from scripts.views import manager
 
 def home(request):
-   ID = range(len(manager.script_list))
-   list_of_path = manager.script_list
+   list_of_path = manager.get_script_list_for_field('Structure')
+   ID = [manager.script_ID[i] for i in list_of_path]
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]
    list_of_category = [manager.script_category[i] for i in list_of_path]

@@ -41,7 +41,6 @@ else:
 #! Beton:
 concrete = MaterialConcrete()
 concrete_class_list = concrete.get_availableconcreteclass()
-concrete_class_list = ['C12/15','C16/20','C20/25','C25/30','C30/37']
 concrete_class = concrete_class_list[1] #<<< - klasa betonu
 concrete.set_concreteclass(concrete_class)
 fcd = concrete.fcd
@@ -68,8 +67,9 @@ Ap = results['Ap'].asUnit(u.cm2) #! - zbrojenie po stronie p
 An = results['An'].asUnit(u.cm2) #! - zbrojenie po stronie n
 
 '''
+SeeID : 58664383
+SeeField : Structure
 SeeName : Zbrojenie EC
-SeeCategory : Structure
-
+SeeCategory : Concrete
 SeeDescription : Zbrojenie przekroju prostokatnego
 '''
