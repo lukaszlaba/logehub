@@ -34,7 +34,8 @@
           <th>Name</th>
           <th>Category</th>
           <th>Description</th>
-          <th> </th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -44,11 +45,11 @@
                 <td>{{script.4}}</td>
                 <td>{{script.2}}</td>
                 {% if script.5 %}
-                <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Run</button></i></a>
-                <i <button type="button" class="btn btn-secondary btn-sm">Code</button></i></td>
+                <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Run</button></i></a></td>
+                <td><i <button type="button" class="btn btn-secondary btn-sm">Code</button></i></td>
                 {% else %}
-                <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Run</button></i></a>
-                <a href="{% url 'source' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Code</button></i></a></td>
+                <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Run</button></i></a></td>
+                <td><a href="{% url 'source' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Code</button></i></a></td>
                 {% endif %}
         {% endfor %}
         </tr>

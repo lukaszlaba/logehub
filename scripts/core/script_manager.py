@@ -1,7 +1,5 @@
-import sys
-import subprocess
 import os
-import time
+import codecs
 import re
 
 class Manager() :
@@ -32,7 +30,7 @@ class Manager() :
         ID_if_not_exist = 6767
         for i in self.script_list:
             script_path = i
-            file = open(script_path, 'r')
+            file = codecs.open(script_path, 'r', 'utf-8')
             script = file.read()
             ID = None
             ID = re.search(r"SeeID :[ ]*(.+)", script)
@@ -48,7 +46,7 @@ class Manager() :
         name_dict = {}
         for i in self.script_list:
             script_path = i
-            file = open(script_path, 'r')
+            file = codecs.open(script_path, 'r', 'utf-8')
             script = file.read()
             name = None
             name = re.search(r"SeeName :[ ]*(.+)", script)
@@ -63,7 +61,7 @@ class Manager() :
         description_dict = {}
         for i in self.script_list:
             script_path = i
-            file = open(script_path, 'r')
+            file = codecs.open(script_path, 'r', 'utf-8')
             script = file.read()
             description = None
             description = re.search(r"'''.*SeeDescription\s*:(.*?)'''", script, flags=re.DOTALL)
@@ -78,7 +76,7 @@ class Manager() :
         category_dict = {}
         for i in self.script_list:
             script_path = i
-            file = open(script_path, 'r')
+            file = codecs.open(script_path, 'r', 'utf-8')
             script = file.read()
             category = None
             category = re.search(r"SeeCategory :[ ]*(.+)", script)
@@ -93,7 +91,7 @@ class Manager() :
         field_dict = {}
         for i in self.script_list:
             script_path = i
-            file = open(script_path, 'r')
+            file = codecs.open(script_path, 'r', 'utf-8')
             script = file.read()
             field = None
             field = re.search(r"SeeField :[ ]*(.+)", script)
@@ -108,7 +106,7 @@ class Manager() :
         lock_dict = {}
         for i in self.script_list:
             script_path = i
-            file = open(script_path, 'r')
+            file = codecs.open(script_path, 'r', 'utf-8')
             script = file.read()
             if 'SeeCodeIsLocked' in script:
                 lock_dict[i] = True

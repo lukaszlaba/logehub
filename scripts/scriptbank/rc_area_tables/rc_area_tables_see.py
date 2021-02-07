@@ -58,5 +58,5 @@ SeeID : 88949230
 SeeField : Structure
 SeeName : Tabele zbrojenia
 SeeCategory : Concrete
-SeeDescription : Interaktywne tablice powierzchni zbrojenia
+SeeDescription : Interaktywne tablice powierzchni zbrojenia.
 '''

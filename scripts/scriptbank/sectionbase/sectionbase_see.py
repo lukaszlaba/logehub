@@ -63,6 +63,6 @@ if active:
 SeeID : 93429003
 SeeField : Structure
 SeeCategory : Steel
-SeeName : Sectionbase
-SeeDescription : Sectionbase of steel profile.
+SeeName : Baza profili
+SeeDescription : Baza profili stalowych EU, UK, US
 '''
