@@ -26,5 +26,5 @@ Area #! - circle area
 SeeName : Circle area
 SeeCategory : Math
 
-SeeDescription : It alculate circle area
+SeeDescription : It calculate circle area.
 '''

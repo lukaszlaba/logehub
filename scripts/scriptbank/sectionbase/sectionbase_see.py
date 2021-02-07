@@ -64,5 +64,5 @@ SeeID : 93429003
 SeeField : Structure
 SeeCategory : Steel
 SeeName : Baza profili
-SeeDescription : Baza profili stalowych EU, UK, US
+SeeDescription : Baza profili stalowych EU, UK, US.
 '''

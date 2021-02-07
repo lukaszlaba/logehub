@@ -21,5 +21,5 @@ plt.clf()
 SeeName : Matplotlib
 SeeCategory : Math
 
-SeeDescription : Test wykresu
+SeeDescription : Test Matplotlib
 '''

@@ -62,10 +62,12 @@ if showInfo:
 
 
 '''
+SeeID : 833266
+SeeField : Structure
 SeeCodeIsLocked
-SeeName : Zaciski
+SeeName : Zaciski srub
 SeeCategory : Steel
 
-SeeDescription : Dobiera zacisk
+SeeDescription : Dobiera zaciki srub zwykłych i spreżanych.
 '''
 

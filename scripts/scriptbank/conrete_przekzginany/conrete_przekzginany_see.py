@@ -36,8 +36,10 @@ potrzebne zbrojenie dolem var_As1
 
 
 '''
-SeeName : Przekroj zginany
+SeeID : 222113
+SeeField : Structure
+SeeName : Przekrój zginany
 SeeCategory : Concrete
 
-SeeDescription : Liczy sbrojenie
+SeeDescription : Bardzo uproszczona metoda liczenia zbrojenia na zginanie.
 '''
