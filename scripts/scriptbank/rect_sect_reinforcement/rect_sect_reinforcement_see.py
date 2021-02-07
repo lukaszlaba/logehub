@@ -67,6 +67,7 @@ Ap = results['Ap'].asUnit(u.cm2) #! - zbrojenie po stronie p
 An = results['An'].asUnit(u.cm2) #! - zbrojenie po stronie n
 
 '''
+SeeCodeIsLocked
 SeeID : 58664383
 SeeField : Structure
 SeeName : Zbrojenie EC

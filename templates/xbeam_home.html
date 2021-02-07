@@ -38,13 +38,19 @@
         </tr>
       </thead>
       <tbody>
-          {% for script in script_book%}
-                <tr>
-                  <td> <h6> {{script.1}} </h6></td>
-                  <td>{{script.4}}</td>
-                  <td>{{script.2}}</td>
-                  <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm" >Run</button></i></a></td>
-          {% endfor %}
+        {% for script in script_book%}
+              <tr>
+                <td> <h6> {{script.1}} </h6></td>
+                <td>{{script.4}}</td>
+                <td>{{script.2}}</td>
+                {% if script.5 %}
+                <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Run</button></i></a>
+                <i <button type="button" class="btn btn-secondary btn-sm">Code</button></i></td>
+                {% else %}
+                <td><a href="{% url 'report' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Run</button></i></a>
+                <a href="{% url 'source' script.0 %}" target="_blank"><i <button type="button" class="btn btn-primary btn-sm">Code</button></i></a></td>
+                {% endif %}
+        {% endfor %}
         </tr>
       </tbody>
     </table>

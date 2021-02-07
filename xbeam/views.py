@@ -8,8 +8,9 @@ def home(request):
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]
    list_of_category = [manager.script_category[i] for i in list_of_path]
+   list_of_codelock = [manager.script_codelock[i] for i in list_of_path]
 
-   script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category)
+   script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category, list_of_codelock)
    number_of_scripts = len(list_of_path)
 
    return render(request, 'xbeam_home.html',

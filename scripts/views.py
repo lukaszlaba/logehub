@@ -31,8 +31,9 @@ def script_list(request):
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]
    list_of_category = [manager.script_category[i] for i in list_of_path]
+   list_of_codelock = [manager.script_codelock[i] for i in list_of_path]
 
-   script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category)
+   script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category, list_of_codelock)
    number_of_scripts = len(list_of_path)
 
    return render(request, 'scriptlist.html',
@@ -62,6 +63,18 @@ def report(request, script_ID):
    shell.run_parsed()
    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
    #return HttpResponseRedirect('/scripts/report/script_id%s' % script.script_id)
+
+def source(request, script_ID):
+   script_ID = int(script_ID) # this is permanent script ID
+   script_path = manager.give_me_path_for_ID(script_ID)
+   #---
+   script = Script()
+   script.name = manager.script_name[script_path]
+   script.openFile(script_path)
+   if manager.script_codelock[script_path]:
+       script.code_oryginal = '>>>>> Sorry, but this source code is protected <<<<<'
+   #---
+   return render(request, 'source.html', {'script': script})
 
 def report_show(request):
     # --data from request

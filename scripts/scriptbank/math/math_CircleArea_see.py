@@ -28,6 +28,3 @@ SeeCategory : Math
 
 SeeDescription : It alculate circle area
 '''
-
-
-

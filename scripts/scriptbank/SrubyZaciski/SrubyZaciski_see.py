@@ -62,6 +62,7 @@ if showInfo:
 
 
 '''
+SeeCodeIsLocked
 SeeName : Zaciski
 SeeCategory : Steel
 

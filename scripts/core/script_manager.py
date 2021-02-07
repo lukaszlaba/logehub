@@ -14,6 +14,7 @@ class Manager() :
         self.script_description = self.get_script_description()
         self.script_category = self.get_script_category()
         self.script_field = self.get_script_field()
+        self.script_codelock = self.get_script_lock()
         #-----
         self.categories = list(set(self.script_category.values())) + ['Any category']
 
@@ -54,7 +55,7 @@ class Manager() :
             if name :
                 name = name.group(1)
             else :
-                name = 'Brak nazwy'
+                name = 'Unnamed'
             name_dict[i] = name
         return name_dict
 
@@ -103,6 +104,18 @@ class Manager() :
             field_dict[i] = field
         return field_dict
 
+    def get_script_lock(self):
+        lock_dict = {}
+        for i in self.script_list:
+            script_path = i
+            file = open(script_path, 'r')
+            script = file.read()
+            if 'SeeCodeIsLocked' in script:
+                lock_dict[i] = True
+            else :
+                lock_dict[i] = False
+        return lock_dict
+
     def get_script_list_for_field(self, field):
         scriptlist = []
         for path in self.script_list:
@@ -124,6 +137,5 @@ if __name__ == "__main__":
     print(script_maneger.script_category)
     print(script_maneger.script_field)
     print(script_maneger.categories)
-    script_maneger.run_some_script(manager.script_list[1])
-    script_maneger.run_some_script('dsdsd')
+    print(script_maneger.script_codelock)
     print(script_maneger.get_script_list_for_field('Structure'))
