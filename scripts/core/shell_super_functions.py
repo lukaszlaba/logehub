@@ -71,6 +71,21 @@ def r_adj(text = 'text', link = 'link', comment = 'somecomment', mode = 1, code 
         index = int(islist.group(3))
         setvalues = ('%(' + str(variable) + ')s') % vars_formated()
         setvalues = setvalues.replace(' ', '') #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<logeweb edit
+
+
+    #---ziping - reducing the lemgrh of setvalues using zlib becousw thw url has limit
+    #----------------------------------------------
+    import zlib
+    import binascii
+    if setvalues:
+        setvalues =setvalues.encode('UTF-8')
+        setvalues = zlib.compress(setvalues)
+        setvalues = binascii.b2a_hex(setvalues)
+        print(setvalues, 'ooooooooooooooooooo')
+    #----------------------------------------------
+
+
+
     if mode == 1:
         href='[{0}]({5};{1};{3};{4}) {2}'.format(text, link, comment, setvalues, index, script_id) #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<logeweb edit
     if mode == 2:

@@ -97,15 +97,29 @@ def report_show(request):
 def report_edit(request):
     # --data from request
     data = request.META.get('PATH_INFO', None)
+    print(data, '<<<<<<<<<<<<<<<<<<<<')
+
     data = data.replace('/scripts/report/', '')
     print(data, '<<<<<<<<<<<HWRW')
     script_id = data.split(';')[0]
     script_id = script_id.replace('script_id', '')
     line_id = data.split(';')[1]
-    print(data, '<<<<<<<<<<<<<<<<<<<<,,')
+    print(data, '<<<<<<<<<<<<<<<<<<<<')
     setvalues = data.split(';')[2]
     if setvalues == 'None':
         setvalues = None
+
+    # ---------unzioing--------
+    if setvalues:
+        import zlib
+        import binascii
+        setvalues = eval(setvalues)
+        setvalues = binascii.a2b_hex(setvalues)
+        setvalues = zlib.decompress(setvalues)
+        setvalues = setvalues.decode('UTF-8')
+    # -------------------------
+
+
     index = data.split(';')[3]
 
     # --build script
