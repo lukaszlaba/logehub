@@ -90,8 +90,13 @@ def report_show(request):
     script.script_path = db_record.path
     shell.assign_code(script)
     # ---run script to get html
-    script.parse()
-    shell.run_parsed()
+    if db_record.html_tmp_holder == 'None':
+        script.parse()
+        shell.run_parsed()
+    else:
+        shell.report_html = db_record.html_tmp_holder
+        db_record.html_tmp_holder = 'None'
+        db_record.save()
     return render(request, 'report.html', {'report': shell.report_html, 'script': script})
 
 def report_edit(request):
@@ -149,8 +154,8 @@ def report_edit(request):
     if old_value in ('True', 'False'):
         script.editCode(line_id, setvalues, index)
         # ---run script to get html
-        script.parse()
-        shell.run_parsed()
+        #script.parse()
+        #shell.run_parsed()
         # ---save updated code
         db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw')))
         db_record.code = script.code_oryginal
@@ -174,10 +179,10 @@ def report_edit(request):
            return render(request, 'edit_error.html', {'data': data,
                                                       'script_id': script_id,
                                                       'massage': massage})
-
        #---save updated code
        db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
        db_record.code = script.code_oryginal
+       db_record.html_tmp_holder = shell.report_html
        db_record.save()
        #---display report
        #return render(request, 'report.html', {'report': shell.report_html, 'script': script})

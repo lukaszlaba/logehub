@@ -7,6 +7,7 @@ class ScriptRecord(models.Model):
     category = models.CharField(max_length=64, default='None category')
     description = models.TextField(default='-')
     code = models.TextField(default='#! Empty script')
+    html_tmp_holder = models.TextField(default='None')
     last_time_used = models.CharField( default='-', max_length=64, blank=True)
     def __str__(self):
         return self.name
