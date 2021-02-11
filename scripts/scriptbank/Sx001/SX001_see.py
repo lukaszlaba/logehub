@@ -86,10 +86,10 @@ V_zEd = gamma_f * 0.5 * p_k * L #%requ - najwieksza sił`a poprzeczna przy podpo
 #---------------------------------------------------------
 #---------------------------------------------------------
 #!###6 . Klasyfikacja przekroju
-epsilon = ((235.0*u.MPa)/(f_y) )**0.5 #%requ - epsilon
+ε = ((235.0*u.MPa)/(f_y) )**0.5 #%requ - ε
 c = (b - t_w - 2*r) / 2 #%requ
 c / t_f #%requ
-((c / t_f) < 9*epsilon) #%requ
+((c / t_f) < 9*ε) #%requ
 #!####Przekrój klasy 1
 #---------------------------------------------------------
 #---------------------------------------------------------
@@ -120,14 +120,14 @@ B = ( (k/k_w)**2*I_w/I_z + (k*L)**2*G*I_t/(math.pi**2*E*I_z) + (C_2*z_g)**2 )**0
 M_cr = ( C_1*(math.pi**2 * E * I_z)/(k * L)**2 * (B - C_2*z_g) ).asUnit(u.kNm) #%requ - wartość momentu krytycznego przy zwichrzeniu
 #--------------------
 #! ####*8.2 Smukłość względna*
-lambda_LT0 = 0.4 #!
-lambda_LT = max( (W_ply*f_y/M_cr)**0.5, lambda_LT0 )  #%requ - smukłość względna
+λ_LT0 = 0.4 #!
+λ_LT = max( (W_ply*f_y/M_cr)**0.5, λ_LT0 )  #%requ - smukłość względna
 #--------------------
 #! ####*8.3 Współczynnik zwichrzenia*
 alpha_LT = 0.49 #! - parametr imprefekcji (dla duteownikó krzywa c)
 beta = 0.75 #!
-phi_LT = 0.5 * (1 + alpha_LT*(lambda_LT-lambda_LT0) + beta*lambda_LT**2) #%requ
-CHI_LT = 1.0 / (phi_LT + (phi_LT**2 - beta*lambda_LT**2)**0.5) #%requ
+phi_LT = 0.5 * (1 + alpha_LT*(λ_LT-λ_LT0) + beta*λ_LT**2) #%requ
+CHI_LT = 1.0 / (phi_LT + (phi_LT**2 - beta*λ_LT**2)**0.5) #%requ
 CHI_LT = min(CHI_LT , 1.0, 1/CHI_LT**2)#%requ - wartość wpółczynnika
 #--------------------
 #!Korekta wartosci wspólczynika ze względu na rozkład momentów
@@ -165,7 +165,7 @@ else:
 #!Sprawdzenie warunku stateczności środnika przy szaiłaniu siły poprzecznej nie jest wymagane gdy:
 eta = 1.0
 h_w = h - 2*t_f
-(h_w/t_w < 72*epsilon/eta) #%requ
+(h_w/t_w < 72*ε/eta) #%requ
 #---------------------------------------------------------
 #---------------------------------------------------------
 #!###10 . Sprawdzenie stanu granicznego ugięć (SGU)
