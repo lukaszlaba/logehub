@@ -108,9 +108,9 @@ class Script():
         #---OPTION 1 Selectind one form list if list
         if setvalues :
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
-            setvalues = setvalues.replace(" ", "")
+            #setvalues = setvalues.replace(" ", "")
             setvalues = setvalues.replace("'", "")
-            setvalues = setvalues.split(',')
+            setvalues = setvalues.split(', ')
             #---
             expresion = re.search(r'(\w+)\s*=\s*(\w+)\s*[[](\d+)[]]\s*#<{2,}_%s_'%lineID, script)
             variable = expresion.group(1)

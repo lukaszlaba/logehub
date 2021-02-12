@@ -104,3 +104,11 @@ https://forum.djangoproject.com/t/show-dynamically-generated-image-in-template/8
 {% block bg_height %}100%{% endblock %}
 {% block bg_height %}100vh{% endblock %}
 
+
+dodanie pola do models
+python manage.py makemigrations
+python manage.py migrate
+...send git upsatew to heroku ...
+heroku run python manage.py makemigrations
+heroku run python manage.py migrate
+

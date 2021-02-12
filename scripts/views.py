@@ -152,13 +152,21 @@ def report_edit(request):
     #---------------------------
 
     if old_value in ('True', 'False'):
-        script.editCode(line_id, setvalues, index)
-        # ---run script to get html
-        #script.parse()
-        #shell.run_parsed()
+        try:
+            # ---update scripy to new value
+            script.editCode(line_id, setvalues, index)
+            # ---run script to get html
+            script.parse()
+            shell.run_parsed()
+        except Exception as e:
+            massage = 'Error - ' + str(e)
+            return render(request, 'edit_error.html', {'data': data,
+                                                       'script_id': script_id,
+                                                       'massage': massage})
         # ---save updated code
         db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw')))
         db_record.code = script.code_oryginal
+        db_record.html_tmp_holder = shell.report_html
         db_record.save()
         # ---display report
         #return render(request, 'report.html', {'report': shell.report_html, 'script': script})
@@ -190,9 +198,11 @@ def report_edit(request):
     else:
         if setvalues:
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
-            setvalues = setvalues.replace(" ", "")
+            print(setvalues, '3RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
+            #setvalues = setvalues.replace(" ", "")
             setvalues = setvalues.replace("'", "")
-            setvalues = setvalues.split(',')
+            setvalues = setvalues.split(', ')
+            print(setvalues, '4RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
             #---
             expresion = re.search(r'(\w+)\s*=\s*(\w+)\s*[[](\d+)[]]\s*#<{2,}_%s_'%line_id, script_code)
             variable = expresion.group(1)

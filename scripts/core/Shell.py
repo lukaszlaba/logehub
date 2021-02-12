@@ -63,7 +63,7 @@ class Shell():
         exec (self.Script.code_oryginal in globals(), locals())
 
     def run_parsed(self):
-        print('Runparsed<<<<<<<<<<<<<<<<<<')
+        #print('Runparsed<<<<<<<<<<<<<<<<<<')
         self.report_markdown = ''
         self.report_html = ''
         self._id = 1

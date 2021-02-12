@@ -70,8 +70,9 @@ def r_adj(text = 'text', link = 'link', comment = 'somecomment', mode = 1, code 
         variable = islist.group(2)
         index = int(islist.group(3))
         setvalues = ('%(' + str(variable) + ')s') % vars_formated()
-        setvalues = setvalues.replace(' ', '') #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<logeweb edit
-
+        print(setvalues, '1RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
+        #setvalues = setvalues.replace(' ', '') #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<logeweb edit
+        print(setvalues, '2RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
 
     #---ziping - reducing the lemgrh of setvalues using zlib becousw thw url has limit
     #----------------------------------------------
