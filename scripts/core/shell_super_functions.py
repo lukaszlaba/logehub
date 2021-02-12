@@ -70,9 +70,7 @@ def r_adj(text = 'text', link = 'link', comment = 'somecomment', mode = 1, code 
         variable = islist.group(2)
         index = int(islist.group(3))
         setvalues = ('%(' + str(variable) + ')s') % vars_formated()
-        print(setvalues, '1RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
         #setvalues = setvalues.replace(' ', '') #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<logeweb edit
-        print(setvalues, '2RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
 
     #---ziping - reducing the lemgrh of setvalues using zlib becousw thw url has limit
     #----------------------------------------------
@@ -82,7 +80,6 @@ def r_adj(text = 'text', link = 'link', comment = 'somecomment', mode = 1, code 
         setvalues =setvalues.encode('UTF-8')
         setvalues = zlib.compress(setvalues)
         setvalues = binascii.b2a_hex(setvalues)
-        print(setvalues, 'ooooooooooooooooooo')
     #----------------------------------------------
 
 
@@ -156,7 +153,6 @@ def r_svg(svgObject):
         r_shell.report_markdown += '![svg image](data:image/svg+xml; utf8, %s)'%svgObject + '\n\n'
         r_shell._id += 1
     elif type(svgObject) is svgwrite.drawing.Drawing:
-        print(svgObject.tostring())
         r_shell.report_markdown += '![svg image](data:image/svg+xml; utf8, %s)'%svgObject.tostring() + '\n\n'
         r_shell._id += 1
     else:

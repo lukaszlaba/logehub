@@ -25,21 +25,17 @@ def get_random_id():
     return result_str
 
 def script_list(request):
-
    list_of_path = manager.script_list
    ID = [manager.script_ID[i] for i in list_of_path]
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]
    list_of_category = [manager.script_category[i] for i in list_of_path]
    list_of_codelock = [manager.script_codelock[i] for i in list_of_path]
-
    script_book = zip(ID, list_of_name, list_of_description, list_of_path,list_of_category, list_of_codelock)
    number_of_scripts = len(list_of_path)
-
    return render(request, 'scriptlist.html',
                  {'script_book': script_book,
-                  'number_of_scripts': number_of_scripts}
-                 )
+                  'number_of_scripts': number_of_scripts})
 
 def report(request, script_ID):
    #global script_dict
@@ -56,13 +52,11 @@ def report(request, script_ID):
                                name = script.name,
                                code = script.code_oryginal,
                                path = script.script_path,
-                               last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
-                               )
+                               last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw'))))
    #---
    script.parse()
    shell.run_parsed()
    return render(request, 'report.html', {'report': shell.report_html, 'script': script})
-   #return HttpResponseRedirect('/scripts/report/script_id%s' % script.script_id)
 
 def source(request, script_ID):
    script_ID = int(script_ID) # this is permanent script ID
@@ -102,19 +96,14 @@ def report_show(request):
 def report_edit(request):
     # --data from request
     data = request.META.get('PATH_INFO', None)
-    print(data, '<<<<<<<<<<<<<<<<<<<<')
-
     data = data.replace('/scripts/report/', '')
-    print(data, '<<<<<<<<<<<HWRW')
     script_id = data.split(';')[0]
     script_id = script_id.replace('script_id', '')
     line_id = data.split(';')[1]
-    print(data, '<<<<<<<<<<<<<<<<<<<<')
     setvalues = data.split(';')[2]
     if setvalues == 'None':
         setvalues = None
-
-    # ---------unzioing--------
+    # ---------unzipping--------
     if setvalues:
         import zlib
         import binascii
@@ -123,10 +112,7 @@ def report_edit(request):
         setvalues = zlib.decompress(setvalues)
         setvalues = setvalues.decode('UTF-8')
     # -------------------------
-
-
     index = data.split(';')[3]
-
     # --build script
     script = Script()
     db_record = ScriptRecord.objects.get(script_id=script_id)
@@ -135,8 +121,7 @@ def report_edit(request):
     script.code_oryginal = db_record.code
     script.script_path = db_record.path
     shell.assign_code(script)
-
-    # --geting data about variable to be edited
+    # --getting data about variable to be edited
     script_code = script.code_oryginal
     # ---
     script_code = re.sub(r'#(<{2,})', r"#\1_idx_", script_code)
@@ -144,13 +129,11 @@ def report_edit(request):
     while re.search(r"#<{2,}_idx_", script_code):
         script_code = script_code.replace(r'<_idx_', r"<_id%s_" % no, 1)
         no += 1
-
     expresion = re.search(r'(\w+)\s*=\s*(.+)\s*#<{2,}_%s_' % line_id, script_code)
     variable = expresion.group(1)
     old_value = expresion.group(2)
     old_value = old_value.rstrip()
     #---------------------------
-
     if old_value in ('True', 'False'):
         try:
             # ---update scripy to new value
@@ -162,14 +145,14 @@ def report_edit(request):
             massage = 'Error - ' + str(e)
             return render(request, 'edit_error.html', {'data': data,
                                                        'script_id': script_id,
-                                                       'massage': massage})
+                                                       'massage': massage,
+                                                       'script': script})
         # ---save updated code
         db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw')))
         db_record.code = script.code_oryginal
         db_record.html_tmp_holder = shell.report_html
         db_record.save()
         # ---display report
-        #return render(request, 'report.html', {'report': shell.report_html, 'script': script})
         return HttpResponseRedirect('/scripts/report/script_id%s' % script_id)
 
     if request.method == 'POST' :
@@ -186,23 +169,20 @@ def report_edit(request):
            massage = 'Error - ' + str(e)
            return render(request, 'edit_error.html', {'data': data,
                                                       'script_id': script_id,
-                                                      'massage': massage})
+                                                      'massage': massage,
+                                                      'script': script})
        #---save updated code
        db_record.last_time_used = str(datetime.now(tz=pytz.timezone('Europe/Warsaw') ))
        db_record.code = script.code_oryginal
        db_record.html_tmp_holder = shell.report_html
        db_record.save()
        #---display report
-       #return render(request, 'report.html', {'report': shell.report_html, 'script': script})
        return HttpResponseRedirect('/scripts/report/script_id%s'%script_id)
     else:
         if setvalues:
             setvalues = re.search(r'[[](.+)[]]', setvalues).group(1)
-            print(setvalues, '3RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
-            #setvalues = setvalues.replace(" ", "")
             setvalues = setvalues.replace("'", "")
             setvalues = setvalues.split(', ')
-            print(setvalues, '4RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR')
             #---
             expresion = re.search(r'(\w+)\s*=\s*(\w+)\s*[[](\d+)[]]\s*#<{2,}_%s_'%line_id, script_code)
             variable = expresion.group(1)
@@ -213,7 +193,7 @@ def report_edit(request):
             choices = [(setvalues[i], setvalues[i]) for i in range(len(setvalues))]
             form.fields['value'].choices = choices
             form.fields['value'].initial = choices[listindex][0]
-            return render(request, 'edit_form.html', {'form': form})
+            return render(request, 'edit_form.html', {'form': form, 'script': script})
         else:
             #---
             expresion = re.search(r'(\w+)\s*=\s*(.+)\s*#<{2,}_%s_' % line_id, script_code)
@@ -224,4 +204,4 @@ def report_edit(request):
             form = Value_form()
             form.fields['value'].label = variable + ' = '
             form.fields['value'].initial = oldvalue
-            return render(request, 'edit_form.html', {'form': form})
+            return render(request, 'edit_form.html', {'form': form, 'script': script})
