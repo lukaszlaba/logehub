@@ -52,9 +52,10 @@ svg_document.add(svg_document.text("Rectangle size" + str(a)+ 'x' +str(b) ,
 svg_document #%svg
 
 '''
+SeeID : 677654
+SeeField : Demo
 SeeName : Svg
 SeeCategory : Svg
-
-SeeDescription : Test svg
+SeeDescription : Svg display test.
 '''
 

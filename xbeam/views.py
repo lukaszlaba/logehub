@@ -3,7 +3,7 @@ from django.shortcuts import render
 from scripts.views import manager
 
 def home(request):
-   list_of_path = manager.get_script_list_for_field('Structure')
+   list_of_path = manager.get_script_list_for_field('XbeamStructure')
    ID = [manager.script_ID[i] for i in list_of_path]
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]

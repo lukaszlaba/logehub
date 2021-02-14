@@ -35,8 +35,9 @@ figure.clf()
 
 
 '''
-SeeName : Parabola
+SeeID : 112945
+SeeField : Demo
+SeeName : Quadratic function
 SeeCategory : Math
-
-SeeDescription : Obliczanie miejsc zerowych
+SeeDescription : Quadratic function roots calculation.
 '''

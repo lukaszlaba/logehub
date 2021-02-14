@@ -55,7 +55,7 @@ if show_per_spacing:
 
 '''
 SeeID : 88949230
-SeeField : Structure
+SeeField : XbeamStructure
 SeeName : Tabele zbrojenia
 SeeCategory : Concrete
 SeeDescription : Interaktywne tablice powierzchni zbrojenia.

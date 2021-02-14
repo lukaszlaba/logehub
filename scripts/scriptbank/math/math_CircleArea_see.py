@@ -23,8 +23,9 @@ Area #! - circle area
 #! ###So, the area of circle diameter %(r)s is %(Area)s .
 
 '''
+SeeID : 894452
+SeeField : Demo
 SeeName : Circle area
 SeeCategory : Math
-
-SeeDescription : It calculate circle area.
+SeeDescription : Circle area calculation.
 '''

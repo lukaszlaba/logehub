@@ -5,8 +5,9 @@ d.text((10, 10), "Hello World", fill=(255, 255, 0))
 img #%pil
 
 '''
+SeeID : 900212
+SeeField : Demo
 SeeName : Pillow
 SeeCategory : Image
-
-SeeDescription : Test pillow
+SeeDescription : Pillow display.
 '''

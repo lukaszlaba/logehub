@@ -60,7 +60,6 @@ if showInfo:
     #! %(text)s
     None
 
-
 '''
 SeeID : 833266
 SeeField : Structure

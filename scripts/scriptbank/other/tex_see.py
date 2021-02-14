@@ -14,8 +14,10 @@ s1 = np.cos(9*np.pi*t) + 3 * t ** 2 #%tex
 
 
 '''
+SeeID : 887986
+SeeField : Demo
 SeeName : Tex
 SeeCategory : Math
 
-SeeDescription : Test tex
+SeeDescription : Tex display test.
 '''

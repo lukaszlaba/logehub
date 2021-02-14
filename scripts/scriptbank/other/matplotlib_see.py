@@ -18,8 +18,9 @@ plt.clf()
 
 
 '''
+SeeID : 129323
+SeeField : Demo
 SeeName : Matplotlib
 SeeCategory : Math
-
-SeeDescription : Test Matplotlib
+SeeDescription : Matplotlib display test.
 '''

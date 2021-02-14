@@ -8,24 +8,24 @@ import svgwrite
 base = SectionBase()
 steel = MaterialSteel()
 
-#! ##Baza profili
+#! ##Baza profili EU/US/UK
 
 #!--------------------------------------------------------------------------------
 
 basename = 'EU'
 
 basenam_list = base.get_available_databasenames()
-basename = basenam_list[0] #<<< - wybierz baze profili
+basename = basenam_list[0] #<<<< Baza profili - 
 
 base.set_databasename(basename)
 
 full_basename = base.get_database_name()
-#! ####Baza profili - val_basename / val_full_basename
+#! Baza val_basename / val_full_basename
 
 types = base.get_database_sectiontypes()
-family = types[0] #<<< - wybierz rodzine profilu
+family = types[0] #<<<< Rodzina profilu -
 names = base.get_database_sectionlistwithtype(family)
-name = names[2] #<<< - wybierz przekroj
+name = names[2] #<<<< Profil - 
 
 active = False #<<<  Parametry profilu
 if active:
@@ -47,7 +47,7 @@ if active:
 	svg_scene = SvgCreator2D()
 	svg_scene.scene = svgwrite.Drawing(size = ('300', '300'))
 	scale_list = [10*u.mm, 25*u.mm, 50*u.mm, 75*u.mm, 100*u.mm]
-	scale = scale_list[1] #<<< - set scale of view
+	scale = scale_list[1] #<<<< >Skala - 
 	svg_scene.set_unit(scale / 20)
 	svg_scene.setvievbox(center=[0.0*u.mm, 0.0*u.mm], width = 300, high=300, boarder = True)
 	base.draw_sectiongeometry(svg_scene, name, 1)
@@ -61,7 +61,7 @@ if active:
 
 '''
 SeeID : 93429003
-SeeField : Structure
+SeeField : XbeamStructure
 SeeCategory : Steel
 SeeName : Baza profili
 SeeDescription : Baza profili stalowych EU, UK, US.

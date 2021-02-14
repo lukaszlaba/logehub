@@ -25,7 +25,8 @@ def get_random_id():
     return result_str
 
 def script_list(request):
-   list_of_path = manager.script_list
+   #list_of_path = manager.script_list
+   list_of_path = manager.get_script_list_for_field('Demo')
    ID = [manager.script_ID[i] for i in list_of_path]
    list_of_name = [manager.script_name[i] for i in list_of_path]
    list_of_description = [manager.script_description[i] for i in list_of_path]

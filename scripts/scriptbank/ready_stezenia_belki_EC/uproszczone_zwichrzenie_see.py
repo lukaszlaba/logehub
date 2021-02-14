@@ -200,8 +200,8 @@ if option == option_list[2]:
 
 '''
 SeeID : 200094
-SeeField : Structure
+SeeField : XbeamStructure
 SeeCategory : Steel 
 SeeName : Rozstaw stężeń dla belki wg EC
-SeeDescription : Obliczenie rozstawu steżeń dla belki zginanaj przy uzyciu uproszczonej oceny wg pkt. 6.6.2.4 PN-EN 1993-1-1
+SeeDescription : Obliczenie rozstawu steżeń dla belki zginanaj przy uzyciu uproszczonej oceny wg pkt. 6.6.2.4 PN-EN 1993-1-1.
 '''
