@@ -12,7 +12,7 @@ steel = MaterialSteel()
 
 #! ##Obliczenie rozstawu steżeń dla belki zginanaj przy użyciu uproszczonej oceny wg pkt 6.6.2.4 PN-EN 1993-1-1 
 
-#! Elementy, w których pas ściskany jest stężony punktowo w kierunku bocznym, nie są narażone na zwichrzenie, jeśli rozstaw pomiędzy stężeniami Lc i wynikająca z niego smukłość zastępczego pasa ściskanego spełnia warunek 6.6.2.4 jak ponizej.
+#! Elementy, w których pas ściskany jest stężony punktowo w kierunku bocznym, nie są narażone na zwichrzenie, jeśli rozstaw pomiędzy stężeniami Lc i wynikająca z niego smukłość zastępczego pasa ściskanego spełnia warunek 6.6.2.4 jak poniżej.
 
 #%img warunek.png
 
