@@ -170,12 +170,12 @@ if option == option_list[0]:
 		λ_f = k_c*L_c/(i_fz*λ_1) #%requ
 		λ_c0*M_cRd/M_yEd #%requ
 		if λ_f < λ_c0*M_cRd/M_yEd:
-			(λ_f < λ_c0*M_cRd/M_yEd) #%requ - warunek 6.3.2.4(1)
+			(λ_f < λ_c0*M_cRd/M_yEd) #%requ - warunek 6.3.2.4
 			#%img ico_pass.png
 			#! Warunek 6.3.2.4(1) PN-EN 1993-1-1 jest spełniony
 			#! Dla profilu val_name / val_material i momentu var_M_yEd rozstaw steżeń var_L_c jest wystarczający.
 		else:
-			(λ_f < λ_c0*M_cRd/M_yEd) #%requ - warunek 6.3.2.4(1)
+			(λ_f < λ_c0*M_cRd/M_yEd) #%requ - warunek 6.3.2.4
 			#%img ico_failed.png
 			#! !!! Warunek 6.3.2.4(1) PN-EN 1993-1-1 nie spełniony !!!
 			#! !!! Dla profilu val_name / val_material i momentu var_M_yEd rozstaw steżeń var_L_c nie jest zbyt duży !!!
@@ -187,14 +187,14 @@ if option == option_list[1]:
 		#%img ico_failed.png
 		#! !!!!Podany moment jest większy niż nośność przekroju var_M_cRd - zmniejsz wartość momentu lub zwiększ profil!!!
 	else:
-		L_crequ = (λ_c0*M_cRd/M_yEd * (i_fz*λ_1)).asUnit(u.m) / k_c #%requ - przekształcony warunek 6.3.2.4(1)
+		L_crequ = (λ_c0*M_cRd/M_yEd * (i_fz*λ_1)).asUnit(u.m) / k_c #%requ - przekształcony warunek 6.3.2.4
 		#! Dla profilu val_name / val_material i momentu var_M_yEd rozstaw steżeń powienien być nie wiekszy niż var_L_crequ .
 
 #--- OPTION 2
 if option == option_list[2]:
 	utl_list = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 	utl = utl_list[4] #<< - przewidywany masymalny poziom wytężenia przekroju na zginanie
-	L_crequ = (λ_c0*(1/utl) * (i_fz*λ_1) / k_c).asUnit(u.m) #%requ - przekształcony warunek 6.3.2.4(1)
+	L_crequ = (λ_c0*(1/utl) * (i_fz*λ_1) / k_c).asUnit(u.m) #%requ - przekształcony warunek 6.3.2.4
 	#! Dla profilu val_name / val_material i wytężenia val_utl rozstaw steżeń powienien być nie wiekszy niż var_L_crequ .
 
 
