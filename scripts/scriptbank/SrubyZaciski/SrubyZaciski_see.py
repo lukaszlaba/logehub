@@ -66,7 +66,6 @@ SeeField : Structure
 SeeCodeIsLocked
 SeeName : Zaciski srub
 SeeCategory : Steel
-
 SeeDescription : Dobiera zaciki srub zwykłych i spreżanych.
 '''
 
