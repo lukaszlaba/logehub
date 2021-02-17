@@ -16,10 +16,10 @@ description = {}
 description['kg'] = 'mass: metric kilogram'
 description['t'] = 'mass: metric ton'
 description['lb'] = 'mass: imperial pound'
-show = False #<<< Mass conversion
+show = False #<<< Mass conversion (mass)
 if show:
 	input_quantity = 100 #<<< - input quantity
-	input_unit = unit_list[1] #<<< - input unit
+	input_unit = unit_list[4] #<<< - input unit
 	input_unit_description = description[input_unit]
 	#! (val_input_unit_description)
 
@@ -45,7 +45,7 @@ description['inch'] = 'length: imperial inch'
 description['ft'] = 'length: imperial foot'
 description['yd'] = 'length: imperial yard'
 description['mile'] = 'length: imperial mile'
-show = False #<<< Length conversion
+show = False #<<< Length conversion (length)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[5] #<<< - input unit
@@ -145,7 +145,7 @@ description['N'] = 'force: metric newton'
 description['kN'] = 'force: metric kilonewton'
 description['lbf'] = 'force: imperial pound-force'
 description['kip'] = 'force: imperial kilopound-force'
-show = False #<<< Force conversion
+show = False #<<< Force conversion (force)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[2] #<<< - input unit
@@ -170,7 +170,7 @@ description['lbfinch'] = 'moment of force: imperial pound-force at inch arm'
 description['lbfft'] = 'moment of force: imperial pound-force at foot arm'
 description['kipft'] = 'moment of force: imperial kip at foot arm'
 description['kipinch'] = 'moment of force: imperial kip at inch arm'
-show = False #<<< Moment of force conversion
+show = False #<<< Moment of force conversion (force * length)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[2] #<<< - input unit
@@ -199,7 +199,7 @@ description['psi'] = 'pressure: imperial pound-force per square inch'
 description['ksi'] = 'pressure: imperial kilopound-force per square inch'
 description['psf'] = 'pressure: imperial pound-force per square foot'
 description['ksf'] = 'pressure: imperial kilopound-force per square foot'
-show = False #<<< Pressure conversion
+show = False #<<< Pressure conversion (force / lenght^2)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[4] #<<< - input unit
@@ -222,7 +222,7 @@ description['kN/m'] = 'force per length: imperial kilonewton per meter'
 description['lbf/ft'] = 'force per length: imperial pound-force per foot'
 description['plf'] = 'force per length: imperial pound-force per foot'
 description['kip/ft'] = 'force per length: imperial kilopound-force per foot'
-show = False #<<< Force per lenght conversion
+show = False #<<< Force per lenght conversion (force / length)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[1] #<<< - input unit
@@ -245,7 +245,7 @@ description['kN/m3'] = 'subgrade modulus: metric kilonewton per cubic meter'
 description['lbf/inch3'] = 'subgrade modulus: imperial pound-force per cubic foot'
 description['pci'] = 'subgrade modulus: imperial pound-force per cubic inch'
 description['kip/ft3'] = 'subgrade modulus: imperial kilopound-force per cubic foot'
-show = False #<<< Unit weight conversion
+show = False #<<< Unit weight conversion (force  / length^3)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[1] #<<< - input unit
@@ -267,7 +267,7 @@ description = {}
 description['kg/m3'] = 'density: metric kilogram per cubic meter'
 description['t/m3'] = 'density: metric ton per cubic meter'
 description['lb/ft3'] = 'density: imperial pound per cubic foot'
-show = False #<<< Unit mass conversion
+show = False #<<< Unit mass conversion (mass / length^3)
 if show:
 	input_quantity = 100 #<<< - input quantity
 	input_unit = unit_list[1] #<<< - input unit
