@@ -11,11 +11,13 @@ __Unum.VALUE_FORMAT = '%5.' + str (precision) + 'f'
 
 
 #!----
-unit_list = ['--metric--', 'kg', 't', '--imperial--', 'lb']
+unit_list = ['--metric--', 'kg', 't', '--imperial--', 'lb', 'UKton', 'USton']
 description = {}
 description['kg'] = 'mass: metric kilogram'
 description['t'] = 'mass: metric ton'
 description['lb'] = 'mass: imperial pound'
+description['UKton'] = 'mass: imperial UK long ton'
+description['USton'] = 'mass: imperial US short ton'
 show = False #<<< Mass conversion (mass)
 if show:
 	input_quantity = 100 #<<< - input quantity
@@ -25,7 +27,7 @@ if show:
 
 	input_value = input_quantity * eval(input_unit)
 	#! >###val_input_value
-	output_unit = unit_list[4] #<<<< convert to -
+	output_unit = unit_list[1] #<<<< convert to -
 	output_unit_description = description[output_unit]
 	#! (val_output_unit_description)
 	output_value = input_value.asUnit(eval(output_unit))
@@ -216,12 +218,13 @@ if show:
 	#! ##val_input_value = val_output_value
 
 #!----
-unit_list = ['--metric--', 'kN/m', '--imperial--', 'lbf/ft', 'plf', 'kip/ft']
+unit_list = ['--metric--', 'kN/m', '--imperial--', 'lbf/ft', 'plf', 'kip/ft', 'klf']
 description = {}
 description['kN/m'] = 'force per length: imperial kilonewton per meter'
 description['lbf/ft'] = 'force per length: imperial pound-force per foot'
 description['plf'] = 'force per length: imperial pound-force per foot'
 description['kip/ft'] = 'force per length: imperial kilopound-force per foot'
+description['plf'] = 'force per length: imperial kilopound-force per foot'
 show = False #<<< Force per lenght conversion (force / length)
 if show:
 	input_quantity = 100 #<<< - input quantity
@@ -239,12 +242,15 @@ if show:
 	#! ##val_input_value = val_output_value
 
 #!----
-unit_list = ['--metric--', 'kN/m3', '--imperial--', 'lbf/inch3', 'pci', 'kip/ft3']
+unit_list = ['--metric--', 'kN/m3', '--imperial--', 'lbf/inch3', 'pci', 'lbf/ft3', 'pcf', 'kip/ft3', 'kcf']
 description = {}
 description['kN/m3'] = 'subgrade modulus: metric kilonewton per cubic meter'
-description['lbf/inch3'] = 'subgrade modulus: imperial pound-force per cubic foot'
+description['lbf/inch3'] = 'subgrade modulus: imperial pound-force per cubic inch'
 description['pci'] = 'subgrade modulus: imperial pound-force per cubic inch'
+description['lbf/ft3'] = 'subgrade modulus: imperial pound-force per cubic foot'
+description['pcf'] = 'subgrade modulus: imperial pound-force per cubic foot'
 description['kip/ft3'] = 'subgrade modulus: imperial kilopound-force per cubic foot'
+description['kcf'] = 'subgrade modulus: imperial kilopound-force per cubic foot'
 show = False #<<< Unit weight conversion (force  / length^3)
 if show:
 	input_quantity = 100 #<<< - input quantity
@@ -254,7 +260,7 @@ if show:
 
 	input_value = input_quantity * eval(input_unit)
 	#! >###val_input_value
-	output_unit = unit_list[4] #<<<< convert to -
+	output_unit = unit_list[8] #<<<< convert to -
 	output_unit_description = description[output_unit]
 	#! (val_output_unit_description)
 	output_value = input_value.asUnit(eval(output_unit))
