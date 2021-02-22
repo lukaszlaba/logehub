@@ -3,7 +3,7 @@ gunicorn
 django-heroku
 mistune
 
-strupy
+strupy==0.6.3
 unum
 matplotlib
 tabulate
