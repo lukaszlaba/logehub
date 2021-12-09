@@ -79,6 +79,8 @@ heroku config:set DEBUG_MODE=True
 
 https://logehub.herokuapp.com/
 
+admin login/password lukasz/lukasz
+
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
