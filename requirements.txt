@@ -1,7 +1,7 @@
 django
 gunicorn
 django-heroku
-mistune
+mistune 0.8.4
 
 pytz
 
