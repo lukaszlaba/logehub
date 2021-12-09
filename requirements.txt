@@ -3,6 +3,8 @@ gunicorn
 django-heroku
 mistune
 
+pytz
+
 strupy
 unum
 matplotlib
