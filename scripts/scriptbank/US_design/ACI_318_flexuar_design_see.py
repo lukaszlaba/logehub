@@ -6,6 +6,7 @@ Unum.VALUE_FORMAT = "%15.2f"
 
 #! ##ACI 318-19 SINGLY REINFORCED RECTANGULAR SECTION FLEXURE DESIGN 
 #! (beta version for testing)
+
 #-----------------------------------------------------------
 #! ##1. Input data
 #! ####Materials:
@@ -18,7 +19,7 @@ show = False #<<< show figure
 if show:
 	#%img geometry.png
 b = 12*u.inch #<< - section width
-h = 30*u.inch #<< - section depth
+h = 20*u.inch #<< - section depth
 #! ####Reinforcement:
 db_list = ['#3', '#4', '#5', '#6', '#7', '#8', '#9', '#10', '#11', '#14', '#18' ]
 db_dia = {'#3':3/8*u.inch, '#4':4/8*u.inch, '#5':5/8*u.inch,
@@ -29,21 +30,22 @@ db_A =   {'#3':0.11*u.inch2, '#4':0.20*u.inch2, '#5':0.31*u.inch2,
           '#6':0.44*u.inch2, '#7':0.60*u.inch2, '#8':0.79*u.inch2,
           '#9':1.00*u.inch2, '#10':1.27*u.inch2, '#11':1.56*u.inch2, 
           '#14':2.25*u.inch2, '#18':4.00*u.inch2}
-db = db_list[4] #<< - diameter of bars
+db = db_list[6] #<< - diameter of bars
 db_selected = db
 db = db_dia[db]
 
 option = ['direct As area', 'bar quantity']
-selected = option[0] #<<<< Reinforcement area defined by 
+selected = option[1] #<<<< Reinforcement area defined by 
 if selected == 'direct As area':
-	As = 5*u.inch2 #<< - area of reinforcement
+	As = 5.95*u.inch2 #<< - area of reinforcement
 if selected == 'bar quantity':
 	n_list =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] 
-	n = n_list[6] #<< - number of val_db_selected bars
+	n = n_list[2] #<< - number of val_db_selected bars
 	As = n * db_A[db_selected] #! - area of reinforcement
 cc = 2*u.inch #<< - clear cover of reinforcement
 #! ####Required factored moment:
 Mu = 120*u.kipft #<< 
+
 #-----------------------------------------------------------
 #! ##2. Ratio of steel check
 d = h - cc - db/2 #%requ - effective section depth
@@ -93,7 +95,8 @@ else:
 #! ####Calculation of reinforcement ratio ρb limit that producing balanced strain conditions and make section compession-control
 ρb = 0.85*β1*fʹc/fy * 0.003/(0.003+εty) #%requ
 Unum.VALUE_FORMAT = "%15.2f"
-Ab = ρb*b*d #!
+Ab = ρb*b*d #%requ 
+
 #-----------------------------------------------------------
 #! ##3. Nominal flexuar strength
 Unum.VALUE_FORMAT = "%15.2f"
@@ -111,9 +114,9 @@ if εt >= εty:
 if εt < εty:
 	εt < εty #%equ
 	#%img ico_warning.png
-	#! Steel not yield. Note that this section is tension-control! Equivalent depth and steel stress need to be recalculated from the equation
-	#! *0.85×fʹc×b×c =As×0.003×Es×(d-c)/c*
-	a = 0.85*fʹc*b
+	#! Steel not yield. Note that this section is compression-control! Equivalent depth and steel stress need to be recalculated from the equation
+	#! *0.85×β1×fʹc×b×c =As×0.003×Es×(d-c)/c*
+	a = 0.85*β1*fʹc*b
 	b = As*0.003*Es
 	c = -As*0.003*Es*d
 	Δ = b**2 - 4*a*c
