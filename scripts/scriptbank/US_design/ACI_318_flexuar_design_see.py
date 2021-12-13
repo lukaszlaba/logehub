@@ -40,7 +40,7 @@ if selected == 'direct As area':
 	As = 5.95*u.inch2 #<< - area of reinforcement
 if selected == 'bar quantity':
 	n_list =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] 
-	n = n_list[2] #<< - number of val_db_selected bars
+	n = n_list[7] #<< - number of val_db_selected bars
 	As = n * db_A[db_selected] #! - area of reinforcement
 cc = 2*u.inch #<< - clear cover of reinforcement
 #! ####Required factored moment:
@@ -91,7 +91,7 @@ if ρ < ρmax:
 else:	
 	ρ > ρmax #%equ (!!!)
 	#%img ico_warning.png
-	#! The reinforcement ratio is higher than the ACI recommendation. If possibe consider to decrease the reinforcement since the steel area can not be fully counted in to section designing strength.
+	#! The reinforcement ratio is higher than the ACI recommendation. If possibe consider to decrease the reinforcement since the steel area can not be fully counted in to section strength.
 #! ####Calculation of reinforcement ratio ρb limit that producing balanced strain conditions and make section compession-control
 ρb = 0.85*β1*fʹc/fy * 0.003/(0.003+εty) #%requ
 Unum.VALUE_FORMAT = "%15.2f"
@@ -116,11 +116,11 @@ if εt < εty:
 	#%img ico_warning.png
 	#! Steel not yield. Note that this section is compression-control! Equivalent depth and steel stress need to be recalculated from the equation
 	#! *0.85×β1×fʹc×b×c =As×0.003×Es×(d-c)/c*
-	a = 0.85*β1*fʹc*b
-	b = As*0.003*Es
-	c = -As*0.003*Es*d
-	Δ = b**2 - 4*a*c
-	c = (-b+Δ**0.5)/(2*a)#! - recalculated compression depth from above equation
+	aa = 0.85*β1*fʹc*b
+	bb = As*0.003*Es
+	cc = -As*0.003*Es*d
+	Δ = bb**2 - 4*aa*cc
+	c = (-bb+Δ**0.5)/(2*aa)#! - recalculated compression depth from above equation
 	a = β1*c #%requ - recalculated equivalent compression depth
 	Unum.VALUE_FORMAT = "%15.4f"
 	εt = 0.003*(d-c)/c #%requ - recalculated steel strain

@@ -81,8 +81,7 @@ https://logehub.herokuapp.com/
 
 admin login/password lukasz/lukasz
 
-
-
+for production set the
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Zip all your lists to one list of tuples:
 
@@ -114,3 +113,17 @@ python manage.py migrate
 heroku run python manage.py makemigrations
 heroku run python manage.py migrate
 
+
+TODO:
+----------------------------
+- fox the missune issue
+in core_utils.py
+def get_html_from_markdown(markdown='#*test*'):
+    html = mistune.markdown(markdown) <<<<<<<<this not work in curent version (now is mistune.html())
+    return html
+that why ther is mistune==0.8.4 in requirements now
+----------------------------
+-footnote need update
+----- Created with Logehub 0.3.1 -----
+----- Created with Logehub 2021/12/18 21:21:23 -----
+----------------------------
