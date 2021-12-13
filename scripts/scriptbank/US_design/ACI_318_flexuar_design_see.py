@@ -40,7 +40,7 @@ if selected == 'direct As area':
 	As = 5.95*u.inch2 #<< - area of reinforcement
 if selected == 'bar quantity':
 	n_list =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] 
-	n = n_list[7] #<< - number of val_db_selected bars
+	n = n_list[2] #<< - number of val_db_selected bars
 	As = n * db_A[db_selected] #! - area of reinforcement
 cc = 2*u.inch #<< - clear cover of reinforcement
 #! ####Required factored moment:
