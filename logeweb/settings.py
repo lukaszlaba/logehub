@@ -28,7 +28,7 @@ SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be us
 #DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['logehub.pythonanywhere.com']
 
 
 # Application definition
@@ -64,10 +64,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = "logeweb.urls"
 
+#"DIRS": ['templates'],
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ['/home/logehub/logehub/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
